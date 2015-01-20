@@ -46,7 +46,7 @@
      * @copyright 2015 Bas van Driel
      * @license   MIT
      */
-    class DeliveryVan extends Van
+    final class DeliveryVan extends Van
     {
         /**
          * @var int $weight The fuel type of the camping car
