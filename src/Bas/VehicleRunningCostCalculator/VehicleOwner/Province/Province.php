@@ -22,7 +22,7 @@
     namespace Bas\VehicleRunningCostCalculator\VehicleOwner\Province;
 
     /**
-     * Defines all the provinces as integer format in constant and it's utility methods.
+     * Defines all the provinces as integer format in constants and it's utility methods.
      *
      * @package   Bas\VehicleRunningCostCalculator\VehicleOwner\Province
      *
