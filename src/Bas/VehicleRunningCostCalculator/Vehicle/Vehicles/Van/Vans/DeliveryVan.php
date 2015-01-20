@@ -19,62 +19,67 @@
      * DEALINGS IN THE SOFTWARE.
      */
 
-    namespace Bas\VehicleRunningCostCalculator\Vehicle\Vehicles\Cars;
+    namespace Bas\VehicleRunningCostCalculator\Vehicle\Vehicles\Van\Vans;
 
     /**
-     * Use the "Car" class for polymorphism
+     * Use the "Van" class for polymorphism
      */
-    use Bas\VehicleRunningCostCalculator\Vehicle\Car;
+    use Bas\VehicleRunningCostCalculator\Vehicle\Vehicles\Van\Van;
 
 
     /**
-     * Defines a camping car, a camping car needs the relies on the following data for calculating it's road tax prices:
+     * Defines a delivery van, this vehicle type can have multiple price calculations:
      *
-     * - It's fuel type
+     * When the delivery van is for passengers it relies on the following data to do the road tax data calculations:
+     *
      * - It's weight
-     * - If it's rented or not
-     * - The camping car's owner province
+     * - It's fuel type
      *
-     * @package   Bas\VehicleRunningCostCalculator\Vehicle\Vehicles\Cars
+     * When the delivery van is for commercial use or for disabled people, it relies on the following data to do the
+     * road tax data calculations:
+     *
+     * - It's weight
+     *
+     * @package   Bas\VehicleRunningCostCalculator\Vehicle\Vehicles
      *
      * @author    Bas van Driel <basvandriel94@gmail.com>
      * @copyright 2015 Bas van Driel
      * @license   MIT
      */
-    class CampingCar extends Car
+    class DeliveryVan extends Van
     {
         /**
-         * @var int $fuelType The fuel type of the camping car
-         */
-        private $fuelType;
-
-        /**
-         * @var float $weight The weight of the camping car
+         * @var int $weight The fuel type of the camping car
          */
         private $weight;
 
         /**
-         * @var bool $isRented If the camping car is rented or not
+         * @var int $fuelType The fuel type of the camping car for passengers
          */
-        private $isRented;
+        private $fuelType;
 
         /**
-         * Instantiates a new camping car class
-         *
-         * @param int   $fuelType The fuel type of the camping car
-         * @param float $weight   The weight of the camping car
-         * @param bool  $isRented
+         * @var bool $isCommercial If the delivery van is being used commercially
          */
-        public function __construct($fuelType, $weight, $isRented) {
-            $this->fuelType = $fuelType;
-            $this->weight   = $weight;
-            $this->isRented = $isRented;
+        private $isCommercial;
+
+        /**
+         * Instantiates a new delivery van class
+         *
+         * @param int   $fuelType     The fuel type of the passenger car
+         * @param float $weight       The weight of the passenger car
+         * @param bool  $isCommercial If the delivery van is being used commercially
+         */
+        public function __construct($fuelType, $weight, $isCommercial) {
+            $this->fuelType     = $fuelType;
+            $this->weight       = $weight;
+            $this->isCommercial = $isCommercial;
         }
 
         /**
          * A getter for retrieving the $fuelType variable in a safe way.
          *
-         * @return int $fuelType The fuel type of the camping car
+         * @return int $fuelType The fuel type of the passenger car
          */
         public function getFuelType() {
             return $this->fuelType;
@@ -83,18 +88,18 @@
         /**
          * A getter for retrieving the $weight variable in a safe way.
          *
-         * @return float $weight The weight of the camping car.
+         * @return float $weight The weight of the passenger car.
          */
         public function getWeight() {
             return $this->weight;
         }
 
         /**
-         * A getter for retrieving the $isRented variable in a safe way
+         * A getter for retrieving the $isCommercial variable in a safe way.
          *
-         * @return bool $isRented If the camping car is rented or not
+         * @return float $weight The weight of the passenger car.
          */
-        public function isRented() {
-            return $this->isRented;
+        public function isCommercial() {
+            return $this->isCommercial;
         }
     }

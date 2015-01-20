@@ -19,65 +19,45 @@
      * DEALINGS IN THE SOFTWARE.
      */
 
-    namespace Bas\VehicleRunningCostCalculator\Vehicle\Vehicles\Cars;
+    namespace Bas\VehicleRunningCostCalculator\Vehicle\Vehicles\MobileShop;
 
     /**
-     * Use the "Car" class for polymorphism
+     * Use the "VehicleType" class for polymorphism
      */
-    use Bas\VehicleRunningCostCalculator\Vehicle\Car;
+    use Bas\VehicleRunningCostCalculator\Vehicle\VehicleType;
 
 
     /**
      * Defines a passenger car, a passenger car needs the relies on the following data for calculating it's road tax
      * prices:
      *
-     * - It's fuel type
-     * - It's weight
-     * - The passenger car's owner province
-     *
-     * @package   Bas\VehicleRunningCostCalculator\Vehicle\Vehicles\Cars
+     * -
+     * @package   Bas\VehicleRunningCostCalculator\Vehicle\Vehicles\MobileShop
      *
      * @author    Bas van Driel <basvandriel94@gmail.com>
      * @copyright 2015 Bas van Driel
      * @license   MIT
      */
-    class PassengerCar extends Car
+    class MobileShop implements VehicleType
     {
         /**
-         * @var int $fuelType The fuel type of the camping car
-         */
-        private $fuelType;
-
-        /**
-         * @var float $weight The weight of the camping car
+         * @var float $weight The weight of the mobile shop vehicle type
          */
         private $weight;
 
-
         /**
-         * Instantiates a new passenger car class
+         * Instantiates a new MobileShop class
          *
-         * @param int   $fuelType The fuel type of the passenger car
-         * @param float $weight   The weight of the passenger car
+         * @param float $weight The weight of the mobile shop vehicle type
          */
-        public function __construct($fuelType, $weight) {
-            $this->fuelType = $fuelType;
-            $this->weight   = $weight;
-        }
-
-        /**
-         * A getter for retrieving the $fuelType variable in a safe way.
-         *
-         * @return int $fuelType The fuel type of the passenger car
-         */
-        public function getFuelType() {
-            return $this->fuelType;
+        public function __construct($weight) {
+            $this->weight = $weight;
         }
 
         /**
          * A getter for retrieving the $weight variable in a safe way.
          *
-         * @return float $weight The weight of the passenger car.
+         * @return float $weight The weight of the mobile shop vehicle type
          */
         public function getWeight() {
             return $this->weight;

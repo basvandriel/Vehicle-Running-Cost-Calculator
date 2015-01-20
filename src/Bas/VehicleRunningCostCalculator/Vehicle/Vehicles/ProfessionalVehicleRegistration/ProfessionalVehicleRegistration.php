@@ -19,21 +19,22 @@
      * DEALINGS IN THE SOFTWARE.
      */
 
-    namespace Bas\VehicleRunningCostCalculator\Vehicle\Vehicles;
-
-    use Bas\VehicleRunningCostCalculator\Vehicle\VehicleType;
+    namespace Bas\VehicleRunningCostCalculator\Vehicle\Vehicles\ProfessionalVehicleRegistration;
 
 
     /**
+     * Defines a professional vehicle registration vehicle type, this vehicle type relies on the following data to
+     * calculate it's road tax prices:
      *
+     * - The vehicle owner's province
      *
-     * @package   Bas\VehicleRunningCostCalculator\Vehicle\Vehicles
+     * @package   Bas\VehicleRunningCostCalculator\Vehicle\Vehicles\ProfessionalVehicleRegistration
      *
      * @author    Bas van Driel <basvandriel94@gmail.com>
      * @copyright 2015 Bas van Driel
      * @license   MIT
      */
-    abstract class DeliveryVan implements VehicleType
+    class ProfessionalVehicleRegistration
     {
 
     }

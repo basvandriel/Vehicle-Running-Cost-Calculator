@@ -19,7 +19,12 @@
      * DEALINGS IN THE SOFTWARE.
      */
 
-    namespace Bas\VehicleRunningCostCalculator\Vehicle;
+    namespace Bas\VehicleRunningCostCalculator\Vehicle\Car;
+
+    /**
+     * Use the "VehicleType" class for polymorphism
+     */
+    use Bas\VehicleRunningCostCalculator\Vehicle\VehicleType;
 
 
     /**
@@ -31,20 +36,7 @@
      * @copyright 2015 Bas van Driel
      * @license   MIT
      */
-    class Car implements VehicleType
+    abstract class Car implements VehicleType
     {
 
-        /**
-         * @var int $weight The weight of the selected vehicle type
-         */
-        private $weight;
-
-        /**
-         * A getter for retrieving the $weight variable in a safe way.
-         *
-         * @return int $weight The weight of hte selected vehicle type
-         */
-        public function getWeight() {
-            return $this->weight;
-        }
     }

@@ -52,14 +52,22 @@
         private $province;
 
         /**
+         * @var bool $disabled If the vehicle owner's is handicapped, this is for the delivery van calculations
+         */
+        private $disabled;
+
+        /**
          * Instantiates a new vehicle owner
          *
          * @param VehicleType $vehicleType The vehicle's owner vehicle type
          * @param int         $province    The province where the vehicle owner is living.
+         * @param bool        $disabled    If the vehicle owner's is handicapped, this is for the delivery van
+         *                                 calculations
          */
-        public function __construct(VehicleType $vehicleType, $province) {
+        public function __construct(VehicleType $vehicleType, $province, $disabled) {
             $this->vehicleType = $vehicleType;
             $this->province    = $province;
+            $this->disabled    = $disabled;
         }
 
         /**
@@ -78,5 +86,14 @@
          */
         public function getProvince() {
             return $this->province;
+        }
+
+        /**
+         * A getter for retrieving the $disabled variable in a safe way.
+         *
+         * @return bool If the vehicle owner's is handicapped, this is for the delivery van calculations
+         */
+        public function isDisabled() {
+            return $this->disabled;
         }
     }
