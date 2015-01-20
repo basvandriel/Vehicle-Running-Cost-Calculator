@@ -21,7 +21,9 @@
     namespace Bas\VehicleRunningCostCalculator\Vehicle;
 
     /**
+     * Defines the interface for every vehicle type.
      *
+     * Implement this if you're adding a new vehicle type
      *
      * @package   Bas\VehicleRunningCostCalculator
      *
