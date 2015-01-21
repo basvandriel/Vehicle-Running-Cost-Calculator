@@ -22,6 +22,7 @@
     namespace Bas\VehicleRunningCostCalculator\DataParser\DataParsers;
 
     use Bas\VehicleRunningCostCalculator\DataParser\DataParser;
+    use Bas\VehicleRunningCostCalculator\Vehicle\FuelType\FuelType;
     use Bas\VehicleRunningCostCalculator\Vehicle\Vehicles\Car\Cars\PassengerCar;
     use Bas\VehicleRunningCostCalculator\Vehicle\VehicleType;
     use Bas\VehicleRunningCostCalculator\VehicleOwner\Province\Province;
@@ -41,8 +42,7 @@
     {
 
         public function resolveData(VehicleType $vehicleType, VehicleOwner $vehicleOwner) {
-            $root = __DIR__;
-            return require "{$root}\\var\\PassengerCarData.php";
+            return require "var/road-tax-data/PassengerCarData.php";
         }
 
 
@@ -52,27 +52,46 @@
          * @param VehicleOwner $vehicleOwner The vehicle owner belonging to the vehicle type
          *
          * @return mixed
+         * @throws \Exception
          */
         public function parse(array $resolvedData, VehicleType $vehicleType, VehicleOwner $vehicleOwner) {
-            $data = [];
             /**
              * @type PassengerCar $vehicleType The passenger car vehicle type
              */
-            $vehicleWeight = $vehicleType->getWeight();
-            $province      = strtolower(Province::getProvinceName($vehicleOwner->getProvince()));
+            $province = strtolower(Province::getProvinceName($vehicleOwner->getProvince()));
 
-            //TODO: Implement the "weight class" (not an actual class)
-            $weightClass = 0;
-
-            //TODO: Implement the "second weight class" (not an actual class)
-            $secondWeightClass = 0;
-
-            if (($vehicleType >= $weightClass) && ($vehicleType <= $secondWeightClass)) {
-
+            if (!isset($resolvedData[$province])) {
+                throw new \Exception("Cant find province!");
             }
+            $data = $resolvedData[$province];
+            $data = $data[$this->resolveWeightClass($data, $vehicleType->getWeight())];
+            $fuelType = strtolower(FuelType::getFuelTypeName($vehicleType->getFuelType()));
 
-            $fuelType = $vehicleType->getFuelType();
+            if (!isset($data[$fuelType])) {
+                throw new \Exception("Cant find fuel type");
+            }
+            $data = $data[$fuelType];
 
-            $data = $resolvedData[$province][$weightClass][$fuelType];
+            return $data;
+        }
+
+        public function resolveWeightClass(array $provinceData, $vehicleWeight) {
+            $weightClasses = array_keys($provinceData);
+            for ($weightClassIndex = 0; $weightClassIndex < count($weightClasses); $weightClassIndex++) {
+                $weightClass = $weightClasses[$weightClassIndex];
+
+                //Define the next weight class in the array
+                if ($weightClassIndex !== count($provinceData) - 1) {
+                    $nextWeightClass = $weightClasses[$weightClassIndex + 1];
+                } else {
+                    $nextWeightClass = $weightClass;
+                }
+
+                //The checking if the vehicle belongs to which weight class
+                if ($vehicleWeight >= $weightClass && $vehicleWeight < $nextWeightClass) {
+                    return $weightClass;
+                }
+            }
+            return 0;
         }
     }

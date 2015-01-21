@@ -19,3 +19,31 @@
      * DEALINGS IN THE SOFTWARE.
      */
 
+    use Bas\VehicleRunningCostCalculator\Vehicle\FuelType\FuelType;
+    use Bas\VehicleRunningCostCalculator\Vehicle\Vehicles\Car\Cars\PassengerCar;
+    use Bas\VehicleRunningCostCalculator\VehicleOwner\Province\Province;
+
+    require_once "src/Bas/VehicleRunningCostCalculator/DataParser/DataParser.php";
+    require_once "src/Bas/VehicleRunningCostCalculator/DataParser/DataParserHandler.php";
+    require_once "src/Bas/VehicleRunningCostCalculator/DataParser/DataParsers/PassengerCarDataParser.php";
+
+    require_once "src/Bas/VehicleRunningCostCalculator/VehicleOwner/VehicleOwner.php";
+    require_once "src/Bas/VehicleRunningCostCalculator/VehicleOwner/Province/Province.php";
+
+    require_once "src/Bas/VehicleRunningCostCalculator/Vehicle/VehicleType.php";
+    require_once "src/Bas/VehicleRunningCostCalculator/Vehicle/FuelType/FuelType.php";
+    require_once "src/Bas/VehicleRunningCostCalculator/Vehicle/Vehicles/Car/Car.php";
+    require_once "src/Bas/VehicleRunningCostCalculator/Vehicle/Vehicles/Car/Cars/PassengerCar.php";
+
+    $vehicle = new PassengerCar(FuelType::BENZINE, 651);
+
+    $vehicleOwner = new \Bas\VehicleRunningCostCalculator\VehicleOwner\VehicleOwner($vehicle, Province::ZEELAND, false);
+
+    $parser      = new \Bas\VehicleRunningCostCalculator\DataParser\DataParserHandler($vehicle, $vehicleOwner);
+    $dataParsers = $parser->resolveDataParsers();
+
+    $dataParser = $parser->resolveDataParser($dataParsers);
+    $data       = $parser->getData($dataParser);
+
+    var_dump($data);
+
