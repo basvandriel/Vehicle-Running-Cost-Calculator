@@ -63,8 +63,8 @@
             if (!isset($resolvedData[$province])) {
                 throw new \Exception("Cant find province!");
             }
-            $data = $resolvedData[$province];
-            $data = $data[$this->resolveWeightClass($data, $vehicleType->getWeight())];
+            $data     = $resolvedData[$province];
+            $data     = $data[$this->resolveWeightClass($data, $vehicleType->getWeight())];
             $fuelType = strtolower(FuelType::getFuelTypeName($vehicleType->getFuelType()));
 
             if (!isset($data[$fuelType])) {
@@ -88,7 +88,7 @@
                 }
 
                 //The checking if the vehicle belongs to which weight class
-                if ($vehicleWeight >= $weightClass && $vehicleWeight < $nextWeightClass) {
+                if (($vehicleWeight >= $weightClass) && ($vehicleWeight < $nextWeightClass)) {
                     return $weightClass;
                 }
             }
