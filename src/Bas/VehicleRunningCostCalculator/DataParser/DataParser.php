@@ -19,40 +19,35 @@
      * DEALINGS IN THE SOFTWARE.
      */
 
-    namespace Bas\VehicleRunningCostCalculator\Parser;
+    namespace Bas\VehicleRunningCostCalculator\DataParser;
 
     use Bas\VehicleRunningCostCalculator\Vehicle\VehicleType;
     use Bas\VehicleRunningCostCalculator\VehicleOwner\VehicleOwner;
 
+
     /**
+     * Interface DataParser
      *
-     *
-     * @package   Bas\VehicleRunningCostCalculator\Parser
-     *
-     * @author    Bas van Driel <basvandriel94@gmail.com>
-     * @copyright 2015 Bas van Driel
-     * @license   MIT
+     * @package Bas\VehicleRunningCostCalculator\DataParser
      */
-    class Parser
+    interface DataParser
     {
         /**
-         * @var VehicleType $vehicleType The vehicle type the data has to be parsed for
-         */
-        private $vehicleType;
-
-        /**
-         * @var VehicleOwner $vehicleOwner The vehicle's owner the data has to be parsed for
-         */
-        private $vehicleOwner;
-
-        /**
-         * Instantiates a new Parser class.
+         * Resolves the right data based on the vehicle type in array format
          *
          * @param \Bas\VehicleRunningCostCalculator\Vehicle\VehicleType       $vehicleType
          * @param \Bas\VehicleRunningCostCalculator\VehicleOwner\VehicleOwner $vehicleOwner
+         *
+         * @return array The resolved data array for the selected vehicle type
          */
-        public function __construct(VehicleType $vehicleType, VehicleOwner $vehicleOwner) {
-            $this->vehicleType = $vehicleType;
-            $this->vehicleOwner = $vehicleOwner;
-        }
+        public function resolveData(VehicleType $vehicleType, VehicleOwner $vehicleOwner);
+
+        /**
+         * @param array        $resolvedData The resolved data array for the selected vehicle type
+         * @param VehicleType  $vehicleType  The selected vehicle type
+         * @param VehicleOwner $vehicleOwner The vehicle owner belonging to the vehicle type
+         *
+         * @return int
+         */
+        public function parse(array $resolvedData, VehicleType $vehicleType, VehicleOwner $vehicleOwner);
     }
