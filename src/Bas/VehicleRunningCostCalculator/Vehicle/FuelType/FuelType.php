@@ -17,45 +17,50 @@
      * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
      * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
      * DEALINGS IN THE SOFTWARE.
-     */    
-    
+     */
+
     namespace Bas\VehicleRunningCostCalculator\Vehicle\FuelType;
 
-    
+
     /**
-     * 
+     * Defines all the fuel types as integer format in constants and it's utility methods.
      *
      * @package   Bas\VehicleRunningCostCalculator\Vehicle\FuelType
      *
      * @author    Bas van Driel <basvandriel94@gmail.com>
      * @copyright 2015 Bas van Driel
      * @license   MIT
-     */    
-    class FuelType
+     */
+    final class FuelType
     {
         /**
          * Defines the benzine fuel type
          */
         const BENZINE = 0;
+
         /**
          * Defines the diesel fuel type
          */
         const DIESEL = 1;
+
         /**
          * Defines the LPG3 and aardgas fuel types
          */
         const LPG3_NATURAL_GAS = 2;
+
         /**
          * Defines the lpg and others fuel types
          */
         const LPG_OTHERS = 4;
 
         /**
-         * @param $province
+         * Resolves the fuel type's name by selecting a constant out of this class
          *
-         * @return mixed
+         * @param int $fuelType The fuel type constant
+         *
+         * @return string The fuel type's name
          */
-        public static function getFuelTypeName($province) {
-            return array_flip((new \ReflectionClass(new self))->getConstants())[$province];
+        public static function getFuelTypeName($fuelType) {
+            return array_flip((new \ReflectionClass(new self))->getConstants())[$fuelType];
         }
     }
