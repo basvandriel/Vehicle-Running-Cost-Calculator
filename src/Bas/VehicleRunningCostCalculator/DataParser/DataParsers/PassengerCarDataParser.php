@@ -54,6 +54,7 @@
          * @return mixed
          */
         public function parse(array $resolvedData, VehicleType $vehicleType, VehicleOwner $vehicleOwner) {
+            $data = [];
             /**
              * @type PassengerCar $vehicleType The passenger car vehicle type
              */
@@ -69,5 +70,9 @@
             if (($vehicleType >= $weightClass) && ($vehicleType <= $secondWeightClass)) {
 
             }
+
+            $fuelType = $vehicleType->getFuelType();
+
+            $data = $resolvedData[$province][$weightClass][$fuelType];
         }
     }
