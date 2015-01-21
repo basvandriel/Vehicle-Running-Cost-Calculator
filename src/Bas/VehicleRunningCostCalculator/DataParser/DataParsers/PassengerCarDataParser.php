@@ -30,7 +30,7 @@
 
 
     /**
-     *
+     * Defines a data parser for the passenger car
      *
      * @package   Bas\VehicleRunningCostCalculator\DataParserHandler\DataParsers
      *
@@ -41,18 +41,30 @@
     class PassengerCarDataParser implements DataParser
     {
 
+        /**
+         * Resolves the correct data belonging to the passenger car
+         *
+         * @param VehicleType  $vehicleType  The user's chosen vehicle type
+         * @param VehicleOwner $vehicleOwner The owner of the user's chosen vehicle
+         *
+         * @return array The resolved data belonged to the passenger car
+         */
         public function resolveData(VehicleType $vehicleType, VehicleOwner $vehicleOwner) {
             return require "var/road-tax-data/PassengerCarData.php";
         }
 
 
         /**
+         * Parses the resolved data and returns the right data based on the user's input
+         *
          * @param array        $resolvedData The resolved data array for the selected vehicle type
          * @param VehicleType  $vehicleType  The selected vehicle type
          * @param VehicleOwner $vehicleOwner The vehicle owner belonging to the vehicle type
          *
-         * @return mixed
-         * @throws \Exception
+         * @return int|float The price the user has to pay for it's vehicle type with it's specific fuel type, vehicle
+         *                   weight and living province
+         *
+         * @throws \Exception When it can't find the data in the resolved data array
          */
         public function parse(array $resolvedData, VehicleType $vehicleType, VehicleOwner $vehicleOwner) {
             /**
@@ -75,13 +87,23 @@
             return $data;
         }
 
-        public function resolveWeightClass(array $provinceData, $vehicleWeight) {
-            $weightClasses = array_keys($provinceData);
+        /**
+         * Resolves the "weight class" based on the vehicle's weight and inputted data
+         *
+         * @param array $data          The inputted data where the "weight classes should exist
+         * @param float $vehicleWeight The vehicle type's weight
+         *
+         * //TODO: Move this method, this will be used for more the one vehicle type
+         *
+         * @return int The resolved weight class
+         */
+        public function resolveWeightClass(array $data, $vehicleWeight) {
+            $weightClasses = array_keys($data);
             for ($weightClassIndex = 0; $weightClassIndex < count($weightClasses); $weightClassIndex++) {
                 $weightClass = $weightClasses[$weightClassIndex];
 
                 //Define the next weight class in the array
-                if ($weightClassIndex !== count($provinceData) - 1) {
+                if ($weightClassIndex !== count($data) - 1) {
                     $nextWeightClass = $weightClasses[$weightClassIndex + 1];
                 } else {
                     $nextWeightClass = $weightClass;
