@@ -90,7 +90,7 @@
         /**
          * Resolves the "weight class" based on the vehicle's weight and inputted data
          *
-         * @param array $data          The inputted data where the "weight classes should exist
+         * @param array $data          The inputted data array where the weight classes should exist
          * @param float $vehicleWeight The vehicle type's weight
          *
          * //TODO: Move this method, this will be used for more the one vehicle type

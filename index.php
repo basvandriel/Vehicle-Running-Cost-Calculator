@@ -20,12 +20,14 @@
      */
 
     use Bas\VehicleRunningCostCalculator\Vehicle\FuelType\FuelType;
-    use Bas\VehicleRunningCostCalculator\Vehicle\Vehicles\Car\Cars\PassengerCar;
+    use Bas\VehicleRunningCostCalculator\Vehicle\Vehicles\Van\Vans\DeliveryVan;
     use Bas\VehicleRunningCostCalculator\VehicleOwner\Province\Province;
 
     require_once "src/Bas/VehicleRunningCostCalculator/DataParser/DataParser.php";
     require_once "src/Bas/VehicleRunningCostCalculator/DataParser/DataParserHandler.php";
     require_once "src/Bas/VehicleRunningCostCalculator/DataParser/DataParsers/PassengerCarDataParser.php";
+    require_once "src/Bas/VehicleRunningCostCalculator/DataParser/DataParsers/MotorcycleDataParser.php";
+    require_once "src/Bas/VehicleRunningCostCalculator/DataParser/DataParsers/DeliveryVanDataParser.php";
 
     require_once "src/Bas/VehicleRunningCostCalculator/VehicleOwner/VehicleOwner.php";
     require_once "src/Bas/VehicleRunningCostCalculator/VehicleOwner/Province/Province.php";
@@ -34,10 +36,13 @@
     require_once "src/Bas/VehicleRunningCostCalculator/Vehicle/FuelType/FuelType.php";
     require_once "src/Bas/VehicleRunningCostCalculator/Vehicle/Vehicles/Car/Car.php";
     require_once "src/Bas/VehicleRunningCostCalculator/Vehicle/Vehicles/Car/Cars/PassengerCar.php";
+    require_once "src/Bas/VehicleRunningCostCalculator/Vehicle/Vehicles/Van/Van.php";
+    require_once "src/Bas/VehicleRunningCostCalculator/Vehicle/Vehicles/Van/Vans/DeliveryVan.php";
+    require_once "src/Bas/VehicleRunningCostCalculator/Vehicle/Vehicles/MotorCycle/Motorcycle.php";
 
-    $vehicle = new PassengerCar(FuelType::BENZINE, 651);
+    $vehicle = new DeliveryVan(FuelType::BENZINE, 600, false);
 
-    $vehicleOwner = new \Bas\VehicleRunningCostCalculator\VehicleOwner\VehicleOwner($vehicle, Province::ZEELAND, false);
+    $vehicleOwner = new \Bas\VehicleRunningCostCalculator\VehicleOwner\VehicleOwner($vehicle, Province::GELDERLAND, false);
 
     $parser      = new \Bas\VehicleRunningCostCalculator\DataParser\DataParserHandler($vehicle, $vehicleOwner);
     $dataParsers = $parser->resolveDataParsers();

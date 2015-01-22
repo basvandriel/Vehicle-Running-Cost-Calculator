@@ -22,13 +22,14 @@
     namespace Bas\VehicleRunningCostCalculator\DataParser\DataParsers;
 
     use Bas\VehicleRunningCostCalculator\DataParser\DataParser;
+    use Bas\VehicleRunningCostCalculator\Vehicle\FuelType\FuelType;
+    use Bas\VehicleRunningCostCalculator\Vehicle\Vehicles\Van\Vans\DeliveryVan;
     use Bas\VehicleRunningCostCalculator\Vehicle\VehicleType;
-    use Bas\VehicleRunningCostCalculator\VehicleOwner\Province\Province;
     use Bas\VehicleRunningCostCalculator\VehicleOwner\VehicleOwner;
 
 
     /**
-     * Defines a data parser for the motorcycle vehicle type
+     *
      *
      * @package   Bas\VehicleRunningCostCalculator\DataParser\DataParsers
      *
@@ -36,7 +37,7 @@
      * @copyright 2015 Bas van Driel
      * @license   MIT
      */
-    class MotorcycleDataParser implements DataParser
+    class DeliveryVanDataParser implements DataParser
     {
 
         /**
@@ -48,7 +49,15 @@
          * @return array The resolved data array for the selected vehicle type
          */
         public function resolveData(VehicleType $vehicleType, VehicleOwner $vehicleOwner) {
-            return require "var/road-tax-data/MotorcycleData.php";
+            /**
+             * @type DeliveryVan $vehicleType
+             */
+            if ($vehicleOwner->isDisabled()) {
+                return require "var/road-tax-data/DeliveryVanDisabledData.php";
+            } elseif ($vehicleType->isCommercial()) {
+                return require "var/road-tax-data/DeliveryVanCommercialData.php";
+            }
+            return require "var/road-tax-data/DeliveryVanPassengerData.php";
         }
 
         /**
@@ -56,15 +65,54 @@
          * @param VehicleType  $vehicleType  The selected vehicle type
          * @param VehicleOwner $vehicleOwner The vehicle owner belonging to the vehicle type
          *
-         * @return int
          * @throws \Exception
+         *
+         * @return int
          */
         public function parse(array $resolvedData, VehicleType $vehicleType, VehicleOwner $vehicleOwner) {
-            $province = strtolower(Province::getProvinceName($vehicleOwner->getProvince()));
-            if (!isset($resolvedData[$province])) {
-                throw new \Exception("Can't find the province key");
+            /**
+             * @type DeliveryVan $vehicleType
+             */
+            $weight   = $vehicleType->getWeight();
+            $fuelType = strtolower(FuelType::getFuelTypeName($vehicleType->getFuelType()));
+
+            if ($vehicleOwner->isDisabled() || $vehicleType->isCommercial()) {
+                return $data = $resolvedData[$this->resolveWeightClass($resolvedData, $weight)];
             }
-            $data = $resolvedData[$province];
-            return $data;
+            $data = $resolvedData[$this->resolveWeightClass($resolvedData, $weight)];
+            if (!isset($data[$fuelType])) {
+                throw new \Exception("Cant find the fuel type");
+            }
+            return $data = $data[$fuelType];
+        }
+
+        /**
+         * Resolves the "weight class" based on the vehicle's weight and inputted data
+         *
+         * @param array $data          The inputted data array where the weight classes should exist
+         * @param float $vehicleWeight The vehicle type's weight
+         *
+         * //TODO: Move this method, this will be used for more the one vehicle type
+         *
+         * @return int The resolved weight class
+         */
+        public function resolveWeightClass(array $data, $vehicleWeight) {
+            $weightClasses = array_keys($data);
+            for ($weightClassIndex = 0; $weightClassIndex < count($weightClasses); $weightClassIndex++) {
+                $weightClass = $weightClasses[$weightClassIndex];
+
+                //Define the next weight class in the array
+                if ($weightClassIndex !== count($data) - 1) {
+                    $nextWeightClass = $weightClasses[$weightClassIndex + 1];
+                } else {
+                    $nextWeightClass = $weightClass;
+                }
+
+                //The checking if the vehicle belongs to which weight class
+                if (($vehicleWeight >= $weightClass) && ($vehicleWeight < $nextWeightClass)) {
+                    return $weightClass;
+                }
+            }
+            return 0;
         }
     }
