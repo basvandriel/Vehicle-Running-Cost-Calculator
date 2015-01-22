@@ -25,7 +25,7 @@
      *
      * Implement this if you're adding a new vehicle type
      *
-     * @package   Bas\VehicleRunningCostCalculator
+     * @package   Bas\VehicleRunningCostCalculator\Vehicle
      *
      * @author    Bas van Driel <basvandriel94@gmail.com>
      * @copyright 2015 Bas van Driel
