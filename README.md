@@ -2,7 +2,7 @@
 
 A PHP project to calculate road tax data (for now) for the specific vehicle's owner vehicle.
 
-## Why
+## Purpose
 
 I wanted to improve my skills with object-oriented PHP and arrays with it's functionality. Therefor, i wanted a real-life example.
 
