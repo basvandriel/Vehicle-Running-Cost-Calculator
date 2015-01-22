@@ -22,7 +22,8 @@
     namespace Bas\VehicleRunningCostCalculator\DataParser\DataParsers;
 
     use Bas\VehicleRunningCostCalculator\DataParser\DataParser;
-    use Bas\VehicleRunningCostCalculator\Vehicle\FuelType\FuelType;
+    use Bas\VehicleRunningCostCalculator\DataParser\DataPropertyResolver;
+    use Bas\VehicleRunningCostCalculator\Vehicle\FuelType;
     use Bas\VehicleRunningCostCalculator\Vehicle\Vehicles\Van\Vans\DeliveryVan;
     use Bas\VehicleRunningCostCalculator\Vehicle\VehicleType;
     use Bas\VehicleRunningCostCalculator\VehicleOwner\VehicleOwner;
@@ -77,42 +78,12 @@
             $fuelType = strtolower(FuelType::getFuelTypeName($vehicleType->getFuelType()));
 
             if ($vehicleOwner->isDisabled() || $vehicleType->isCommercial()) {
-                return $data = $resolvedData[$this->resolveWeightClass($resolvedData, $weight)];
+                return $data = $resolvedData[DataPropertyResolver::resolveWeightClass($resolvedData, $weight)];
             }
-            $data = $resolvedData[$this->resolveWeightClass($resolvedData, $weight)];
+            $data = $resolvedData[DataPropertyResolver::resolveWeightClass($resolvedData, $weight)];
             if (!isset($data[$fuelType])) {
                 throw new \Exception("Cant find the fuel type");
             }
             return $data = $data[$fuelType];
-        }
-
-        /**
-         * Resolves the "weight class" based on the vehicle's weight and inputted data
-         *
-         * @param array $data          The inputted data array where the weight classes should exist
-         * @param float $vehicleWeight The vehicle type's weight
-         *
-         * //TODO: Move this method, this will be used for more the one vehicle type
-         *
-         * @return int The resolved weight class
-         */
-        public function resolveWeightClass(array $data, $vehicleWeight) {
-            $weightClasses = array_keys($data);
-            for ($weightClassIndex = 0; $weightClassIndex < count($weightClasses); $weightClassIndex++) {
-                $weightClass = $weightClasses[$weightClassIndex];
-
-                //Define the next weight class in the array
-                if ($weightClassIndex !== count($data) - 1) {
-                    $nextWeightClass = $weightClasses[$weightClassIndex + 1];
-                } else {
-                    $nextWeightClass = $weightClass;
-                }
-
-                //The checking if the vehicle belongs to which weight class
-                if (($vehicleWeight >= $weightClass) && ($vehicleWeight < $nextWeightClass)) {
-                    return $weightClass;
-                }
-            }
-            return 0;
         }
     }
