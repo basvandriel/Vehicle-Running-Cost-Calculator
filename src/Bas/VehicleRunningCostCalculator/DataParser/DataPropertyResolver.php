@@ -72,6 +72,6 @@
             if (!isset($data[$fuelType])) {
                 throw new \Exception("Can't find fuel type");
             }
-            return $data[$fuelType];
+            return $fuelType;
         }
     }
