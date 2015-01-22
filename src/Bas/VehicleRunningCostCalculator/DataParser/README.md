@@ -1,5 +1,5 @@
-# `/DataParserHandler` : Road Tax Data DataParserHandler
+# `/DataParser` : Road Tax Data Parser
 
 ## Purpose
 
-The `/DataParserHandler` hierarchy contains the data parser for retrieving the right data based on which vehicle type the user has chosen.
+The `/DataParser` hierarchy contains the data parser for retrieving the right data based on which vehicle type the user has chosen.
