@@ -41,7 +41,7 @@
      * @copyright 2015 Bas van Driel
      * @license   MIT
      */
-    final class PassengerCar extends Car
+    class PassengerCar extends Car
     {
         /**
          * @var int $fuelType The fuel type of the passenger car

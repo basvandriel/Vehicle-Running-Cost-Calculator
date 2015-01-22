@@ -42,7 +42,7 @@
      * @copyright 2015 Bas van Driel
      * @license   MIT
      */
-    final class CampingCar extends Car
+    class CampingCar extends Car
     {
         /**
          * @var int $fuelType The fuel type of the camping car

@@ -34,7 +34,7 @@
      * @copyright 2015 Bas van Driel
      * @license   MIT
      */
-    final class ProfessionalVehicleRegistration
+    class ProfessionalVehicleRegistration
     {
 
     }

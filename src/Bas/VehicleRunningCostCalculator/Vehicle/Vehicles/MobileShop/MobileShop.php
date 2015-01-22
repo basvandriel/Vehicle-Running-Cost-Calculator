@@ -38,7 +38,7 @@
      * @copyright 2015 Bas van Driel
      * @license   MIT
      */
-    final class MobileShop implements VehicleType
+    class MobileShop implements VehicleType
     {
         /**
          * @var float $weight The weight of the mobile shop vehicle type

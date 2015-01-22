@@ -36,7 +36,7 @@
      * @copyright 2015 Bas van Driel
      * @license   MIT
      */
-    final class Motorcycle implements VehicleType
+    class Motorcycle implements VehicleType
     {
 
     }

@@ -39,7 +39,7 @@
      * @copyright 2015 Bas van Driel
      * @license   MIT
      */
-    final class Bus implements VehicleType
+    class Bus implements VehicleType
     {
         /**
          * @var float $weight The weight of the bus vehicle type
