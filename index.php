@@ -20,11 +20,11 @@
      */
 
     use Bas\VehicleRunningCostCalculator\Vehicle\FuelType;
-    use Bas\VehicleRunningCostCalculator\Vehicle\Vehicles\Van\Vans\DeliveryVan;
     use Bas\VehicleRunningCostCalculator\VehicleOwner\Province;
 
     require_once "src/Bas/VehicleRunningCostCalculator/DataParser/DataParser.php";
     require_once "src/Bas/VehicleRunningCostCalculator/DataParser/DataParserHandler.php";
+    require_once "src/Bas/VehicleRunningCostCalculator/DataParser/DataPropertyResolver.php";
     require_once "src/Bas/VehicleRunningCostCalculator/DataParser/DataParsers/PassengerCarDataParser.php";
     require_once "src/Bas/VehicleRunningCostCalculator/DataParser/DataParsers/MotorcycleDataParser.php";
     require_once "src/Bas/VehicleRunningCostCalculator/DataParser/DataParsers/DeliveryVanDataParser.php";
@@ -40,7 +40,9 @@
     require_once "src/Bas/VehicleRunningCostCalculator/Vehicle/Vehicles/Van/Vans/DeliveryVan.php";
     require_once "src/Bas/VehicleRunningCostCalculator/Vehicle/Vehicles/MotorCycle/Motorcycle.php";
 
-    $vehicle = new DeliveryVan(FuelType::BENZINE, 600, false);
+    $vehicle = new \Bas\VehicleRunningCostCalculator\Vehicle\Vehicles\Van\Vans\DeliveryVan(FuelType::BENZINE,
+                                                                                           800,
+                                                                                           false);
 
     $vehicleOwner = new \Bas\VehicleRunningCostCalculator\VehicleOwner\VehicleOwner($vehicle,
                                                                                     Province::GELDERLAND,

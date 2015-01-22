@@ -23,7 +23,7 @@
 
     use Bas\VehicleRunningCostCalculator\DataParser\DataParser;
     use Bas\VehicleRunningCostCalculator\Vehicle\VehicleType;
-    use Bas\VehicleRunningCostCalculator\VehicleOwner\Province\Province;
+    use Bas\VehicleRunningCostCalculator\VehicleOwner\Province;
     use Bas\VehicleRunningCostCalculator\VehicleOwner\VehicleOwner;
 
 
