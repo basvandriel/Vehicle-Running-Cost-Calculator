@@ -19,7 +19,7 @@
      * DEALINGS IN THE SOFTWARE.
      */
 
-    namespace Bas\VehicleRunningCostCalculator\VehicleOwner\Province;
+    namespace Bas\VehicleRunningCostCalculator\VehicleOwner;
 
     /**
      * Defines all the provinces as integer format in constants and it's utility methods.
@@ -30,7 +30,7 @@
      * @copyright 2015 Bas van Driel
      * @license   MIT
      */
-    final class Province
+    class Province
     {
         /**
          * Defines the province Noord Holland
