@@ -45,8 +45,7 @@
                                                                                            false);
 
     $vehicleOwner = new \Bas\VehicleRunningCostCalculator\VehicleOwner\VehicleOwner($vehicle,
-                                                                                    Province::GELDERLAND,
-                                                                                    false);
+                                                                                    Province::GELDERLAND, false);
 
     $parser      = new \Bas\VehicleRunningCostCalculator\DataParser\DataParserHandler($vehicle, $vehicleOwner);
     $dataParsers = $parser->resolveDataParsers();
