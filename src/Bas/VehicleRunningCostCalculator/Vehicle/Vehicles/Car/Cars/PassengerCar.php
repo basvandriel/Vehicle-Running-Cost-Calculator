@@ -43,16 +43,6 @@
      */
     class PassengerCar extends Car
     {
-        /**
-         * @var int $fuelType The fuel type of the passenger car
-         */
-        private $fuelType;
-
-        /**
-         * @var float $weight The weight of the passenger car
-         */
-        private $weight;
-
 
         /**
          * Instantiates a new passenger car class
@@ -63,23 +53,5 @@
         public function __construct($fuelType, $weight) {
             $this->fuelType = $fuelType;
             $this->weight   = $weight;
-        }
-
-        /**
-         * A getter for retrieving the $fuelType variable in a safe way.
-         *
-         * @return int $fuelType The fuel type of the passenger car
-         */
-        public function getFuelType() {
-            return $this->fuelType;
-        }
-
-        /**
-         * A getter for retrieving the $weight variable in a safe way.
-         *
-         * @return float $weight The weight of the passenger car.
-         */
-        public function getWeight() {
-            return $this->weight;
         }
     }
