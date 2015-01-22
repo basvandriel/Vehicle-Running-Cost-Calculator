@@ -60,18 +60,4 @@
             }
             return 0;
         }
-
-        /**
-         * @param array $data
-         * @param       $fuelType
-         *
-         * @return mixed
-         * @throws \Exception
-         */
-        public static function resolveFuelType(array $data, $fuelType) {
-            if (!isset($data[$fuelType])) {
-                throw new \Exception("Can't find fuel type");
-            }
-            return $fuelType;
-        }
     }
