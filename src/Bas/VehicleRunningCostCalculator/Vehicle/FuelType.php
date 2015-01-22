@@ -44,12 +44,12 @@
         const DIESEL = 1;
 
         /**
-         * Defines the LPG3 and aardgas fuel types
+         * Defines the LPG3 and natural gas fuel types
          */
         const LPG3_NATURAL_GAS = 2;
 
         /**
-         * Defines the lpg and others fuel types
+         * Defines the lpg and other fuel types
          */
         const LPG_OTHERS = 4;
 
