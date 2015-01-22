@@ -19,9 +19,9 @@
      * DEALINGS IN THE SOFTWARE.
      */
 
-    use Bas\VehicleRunningCostCalculator\Vehicle\FuelType\FuelType;
+    use Bas\VehicleRunningCostCalculator\Vehicle\FuelType;
     use Bas\VehicleRunningCostCalculator\Vehicle\Vehicles\Van\Vans\DeliveryVan;
-    use Bas\VehicleRunningCostCalculator\VehicleOwner\Province\Province;
+    use Bas\VehicleRunningCostCalculator\VehicleOwner\Province;
 
     require_once "src/Bas/VehicleRunningCostCalculator/DataParser/DataParser.php";
     require_once "src/Bas/VehicleRunningCostCalculator/DataParser/DataParserHandler.php";
@@ -30,10 +30,10 @@
     require_once "src/Bas/VehicleRunningCostCalculator/DataParser/DataParsers/DeliveryVanDataParser.php";
 
     require_once "src/Bas/VehicleRunningCostCalculator/VehicleOwner/VehicleOwner.php";
-    require_once "src/Bas/VehicleRunningCostCalculator/VehicleOwner/Province/Province.php";
+    require_once "src/Bas/VehicleRunningCostCalculator/VehicleOwner/Province.php";
 
     require_once "src/Bas/VehicleRunningCostCalculator/Vehicle/VehicleType.php";
-    require_once "src/Bas/VehicleRunningCostCalculator/Vehicle/FuelType/FuelType.php";
+    require_once "src/Bas/VehicleRunningCostCalculator/Vehicle/FuelType.php";
     require_once "src/Bas/VehicleRunningCostCalculator/Vehicle/Vehicles/Car/Car.php";
     require_once "src/Bas/VehicleRunningCostCalculator/Vehicle/Vehicles/Car/Cars/PassengerCar.php";
     require_once "src/Bas/VehicleRunningCostCalculator/Vehicle/Vehicles/Van/Van.php";
@@ -42,7 +42,9 @@
 
     $vehicle = new DeliveryVan(FuelType::BENZINE, 600, false);
 
-    $vehicleOwner = new \Bas\VehicleRunningCostCalculator\VehicleOwner\VehicleOwner($vehicle, Province::GELDERLAND, false);
+    $vehicleOwner = new \Bas\VehicleRunningCostCalculator\VehicleOwner\VehicleOwner($vehicle,
+                                                                                    Province::GELDERLAND,
+                                                                                    false);
 
     $parser      = new \Bas\VehicleRunningCostCalculator\DataParser\DataParserHandler($vehicle, $vehicleOwner);
     $dataParsers = $parser->resolveDataParsers();

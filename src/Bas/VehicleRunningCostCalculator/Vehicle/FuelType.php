@@ -19,13 +19,13 @@
      * DEALINGS IN THE SOFTWARE.
      */
 
-    namespace Bas\VehicleRunningCostCalculator\Vehicle\FuelType;
+    namespace Bas\VehicleRunningCostCalculator\Vehicle;
 
 
     /**
      * Defines all the fuel types as integer format in constants and it's utility methods.
      *
-     * @package   Bas\VehicleRunningCostCalculator\Vehicle\FuelType
+     * @package   Bas\VehicleRunningCostCalculator\Vehicle
      *
      * @author    Bas van Driel <basvandriel94@gmail.com>
      * @copyright 2015 Bas van Driel
