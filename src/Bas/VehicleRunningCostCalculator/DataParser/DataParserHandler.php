@@ -21,18 +21,26 @@
 
     namespace Bas\VehicleRunningCostCalculator\DataParser;
 
+    /**
+     * Use the "VehicleType" class for polymorphism
+     */
     use Bas\VehicleRunningCostCalculator\Vehicle\VehicleType;
     use Bas\VehicleRunningCostCalculator\VehicleOwner\VehicleOwner;
 
     /**
-     * A class to retrieve the right data for the selected vehicle type based on the following (specific) user's choices:
+     * Use the "VehicleOwner" class for polymorphism
+     */
+
+    /**
+     * A class to retrieve the right data for the selected vehicle type based on the following (specific) user's
+     * property's:
      *
      * - The vehicle type
      * - The vehicle's fuel type
      * - The vehicle's owner province
-     * - If
+     * - If the vehicle owner is disabled
      *
-     * @package   Bas\VehicleRunningCostCalculator\DataParserHandler
+     * @package   Bas\VehicleRunningCostCalculator\DataParser
      *
      * @author    Bas van Driel <basvandriel94@gmail.com>
      * @copyright 2015 Bas van Driel
@@ -46,15 +54,15 @@
         private $vehicleType;
 
         /**
-         * @var VehicleOwner $vehicleOwner The vehicle's owner the data has to be parsed for
+         * @var VehicleOwner $vehicleOwner The vehicle's owner
          */
         private $vehicleOwner;
 
         /**
          * Instantiates a new DataParserHandler class.
          *
-         * @param \Bas\VehicleRunningCostCalculator\Vehicle\VehicleType       $vehicleType
-         * @param \Bas\VehicleRunningCostCalculator\VehicleOwner\VehicleOwner $vehicleOwner
+         * @param VehicleType  $vehicleType  The vehicle type the data has to be parsed for
+         * @param VehicleOwner $vehicleOwner The vehicle's owner
          */
         public function __construct(VehicleType $vehicleType, VehicleOwner $vehicleOwner) {
             $this->vehicleType  = $vehicleType;
@@ -85,7 +93,7 @@
          * @return DataParser The resolved data parser belonging to the user selected vehicle type
          */
         public function resolveDataParser(array $dataParsers) {
-            //Get the class of the chosen without it's namespace
+            //Get the class of the chosen vehicle type without it's namespace
             $vehicleTypeClass = substr(get_class($this->vehicleType), strrpos(get_class($this->vehicleType), "\\") + 1);
 
             //The fully qualified class name of the data parser belonging to this selected vehicle type
@@ -104,10 +112,10 @@
         /**
          * Retrieves the data from the resolved data parser belonging to the user selected vehicle type
          *
-         * @param DataParser $dataParser The resolved data parser be
+         * @param DataParser $dataParser The resolved data parser belonging to the chosen vehicle type
          *
-         * @return int The resolved vehicle data belonging to the user's choices such as the vehicle type, fuel type,
-         *             where the vehicle owner is living
+         * @return array|int The resolved vehicle data belonging to the user's choices such as the vehicle type, fuel
+         *                   type, where the vehicle owner is living
          */
         public function getData(DataParser $dataParser) {
             $data = $dataParser->resolveData($this->vehicleType, $this->vehicleOwner);
