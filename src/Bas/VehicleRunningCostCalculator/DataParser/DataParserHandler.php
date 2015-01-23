@@ -99,8 +99,10 @@
             //The fully qualified class name of the data parser belonging to this selected vehicle type
             $vehicleTypeDataParser = "{$this->getNamespace()}\\DataParsers\\{$vehicleTypeClass}DataParser";
 
-            //Loop through all the found (resolved) data parsers and select the right one out of it
+            //The array length of the $dataParsers array
             $dataParsersCount = count($dataParsers);
+
+            //Loop through all the found (resolved) data parsers and select the right one out of it
             for ($dataParsersIndex = 0; $dataParsersIndex < $dataParsersCount; $dataParsersIndex++) {
                 if ($dataParsers[$dataParsersIndex] == $vehicleTypeDataParser) {
                     $dataParser = new \ReflectionClass($dataParsers[$dataParsersIndex]);
