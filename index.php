@@ -48,7 +48,7 @@
                                                                                     Province::GELDERLAND,
                                                                                     false);
 
-    $factory     = new \Bas\VehicleRunningCostCalculator\DataParser\DataParserFactory($vehicle, $vehicleOwner);
+    $factory     = new \Bas\VehicleRunningCostCalculator\DataParser\DataParserFactory();
 
     $dataParser = $factory->resolveDataParser($vehicle);
     $data = $dataParser->getData($vehicle, $vehicleOwner);

@@ -27,11 +27,7 @@
     use Bas\VehicleRunningCostCalculator\Vehicle\VehicleType;
 
     /**
-     * Use the "VehicleOwner" class for polymorphism
-     */
-
-    /**
-     * A class to retrieve the right data for the selected vehicle type based on the following (specific) user's
+     * A factory class to retrieve the right data for the selected vehicle type based on the following (specific) user's
      * property's:
      *
      * - The vehicle type
