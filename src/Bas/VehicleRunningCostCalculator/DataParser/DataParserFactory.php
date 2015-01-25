@@ -69,17 +69,15 @@
          */
         public function resolveDataParser(VehicleType $vehicleType) {
             $dataParsers = $this->resolveDataParsers();
-            //Get the class of the chosen vehicle type without it's namespace
             $vehicleTypeClass = substr(get_class($vehicleType), strrpos(get_class($vehicleType), "\\") + 1);
-
             $vehicleTypeDataParser = "{$this->getNamespace()}\\DataParsers\\{$vehicleTypeClass}DataParser";
-
             $dataParsersCount = count($dataParsers);
             for ($dataParserIndex = 0; $dataParserIndex < $dataParsersCount; $dataParserIndex++) {
-                if ($dataParsers[$dataParserIndex] == $vehicleTypeDataParser) {
-                    $dataParser = new \ReflectionClass($dataParsers[$dataParserIndex]);
-                    return $dataParser->newInstance();
+                if ($dataParsers[$dataParserIndex] !== $vehicleTypeDataParser) {
+                    continue;
                 }
+                $dataParser = new \ReflectionClass($dataParsers[$dataParserIndex]);
+                return $dataParser->newInstance();
             }
             return null;
         }
