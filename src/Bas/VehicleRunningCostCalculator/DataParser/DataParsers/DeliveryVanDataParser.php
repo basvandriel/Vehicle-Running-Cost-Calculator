@@ -38,7 +38,7 @@
      * @copyright 2015 Bas van Driel
      * @license   MIT
      */
-    class DeliveryVanDataParser implements DataParser
+    class DeliveryVanDataParser extends DataParser
     {
 
         /**

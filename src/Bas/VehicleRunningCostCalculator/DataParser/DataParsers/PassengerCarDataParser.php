@@ -33,13 +33,13 @@
     /**
      * Defines a data parser for the passenger car
      *
-     * @package   Bas\VehicleRunningCostCalculator\DataParserHandler\DataParsers
+     * @package   Bas\VehicleRunningCostCalculator\DataParserFactory\DataParsers
      *
      * @author    Bas van Driel <basvandriel94@gmail.com>
      * @copyright 2015 Bas van Driel
      * @license   MIT
      */
-    class PassengerCarDataParser implements DataParser
+    class PassengerCarDataParser extends DataParser
     {
 
         /**

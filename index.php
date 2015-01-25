@@ -23,7 +23,7 @@
     use Bas\VehicleRunningCostCalculator\VehicleOwner\Province;
 
     require_once "src/Bas/VehicleRunningCostCalculator/DataParser/DataParser.php";
-    require_once "src/Bas/VehicleRunningCostCalculator/DataParser/DataParserHandler.php";
+    require_once "src/Bas/VehicleRunningCostCalculator/DataParser/DataParserFactory.php";
     require_once "src/Bas/VehicleRunningCostCalculator/DataParser/DataPropertyResolver.php";
     require_once "src/Bas/VehicleRunningCostCalculator/DataParser/DataParsers/PassengerCarDataParser.php";
     require_once "src/Bas/VehicleRunningCostCalculator/DataParser/DataParsers/MotorcycleDataParser.php";
@@ -41,17 +41,18 @@
     require_once "src/Bas/VehicleRunningCostCalculator/Vehicle/Vehicles/MotorCycle/Motorcycle.php";
 
     $vehicle = new \Bas\VehicleRunningCostCalculator\Vehicle\Vehicles\Van\Vans\DeliveryVan(FuelType::BENZINE,
-                                                                                           800,
+                                                                                           900,
                                                                                            false);
 
     $vehicleOwner = new \Bas\VehicleRunningCostCalculator\VehicleOwner\VehicleOwner($vehicle,
-                                                                                    Province::GELDERLAND, false);
+                                                                                    Province::GELDERLAND,
+                                                                                    false);
 
-    $parser      = new \Bas\VehicleRunningCostCalculator\DataParser\DataParserHandler($vehicle, $vehicleOwner);
-    $dataParsers = $parser->resolveDataParsers();
+    $factory     = new \Bas\VehicleRunningCostCalculator\DataParser\DataParserFactory($vehicle, $vehicleOwner);
 
-    $dataParser = $parser->resolveDataParser($dataParsers);
-    $data       = $parser->getData($dataParser);
+    $dataParser = $factory->resolveDataParser($vehicle);
+    $data = $dataParser->getData($vehicle, $vehicleOwner);
 
     var_dump($data);
+
 

@@ -36,7 +36,7 @@
      * @copyright 2015 Bas van Driel
      * @license   MIT
      */
-    class MotorcycleDataParser implements DataParser
+    class MotorcycleDataParser extends DataParser
     {
 
         /**

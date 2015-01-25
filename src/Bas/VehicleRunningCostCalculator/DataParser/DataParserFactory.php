@@ -25,7 +25,6 @@
      * Use the "VehicleType" class for polymorphism
      */
     use Bas\VehicleRunningCostCalculator\Vehicle\VehicleType;
-    use Bas\VehicleRunningCostCalculator\VehicleOwner\VehicleOwner;
 
     /**
      * Use the "VehicleOwner" class for polymorphism
@@ -46,35 +45,15 @@
      * @copyright 2015 Bas van Driel
      * @license   MIT
      */
-    class DataParserHandler
+    class DataParserFactory
     {
-        /**
-         * @var VehicleType $vehicleType The vehicle type the data has to be parsed for
-         */
-        private $vehicleType;
-
-        /**
-         * @var VehicleOwner $vehicleOwner The vehicle's owner
-         */
-        private $vehicleOwner;
-
-        /**
-         * Instantiates a new DataParserHandler class.
-         *
-         * @param VehicleType  $vehicleType  The vehicle type the data has to be parsed for
-         * @param VehicleOwner $vehicleOwner The vehicle's owner
-         */
-        public function __construct(VehicleType $vehicleType, VehicleOwner $vehicleOwner) {
-            $this->vehicleType  = $vehicleType;
-            $this->vehicleOwner = $vehicleOwner;
-        }
 
         /**
          * Retrieves the full qualified class names of every vehicle type data parser
          *
          * @return array The full qualified class names of every vehicle type data parser
          */
-        public function resolveDataParsers() {
+        private function resolveDataParsers() {
             $dataParsers = [];
             foreach (new \DirectoryIterator(__DIR__ . "\\DataParsers") as $dataParser) {
                 if ($dataParser->isDot() || $dataParser->isDir()) {
@@ -88,38 +67,25 @@
         /**
          * Resolves the instance of the right data parser belonging to the selected vehicle type
          *
-         * @param array $dataParsers The full qualified class names of every vehicle type data parser
+         * @param VehicleType $vehicleType
          *
          * @return DataParser The resolved data parser belonging to the user selected vehicle type
          */
-        public function resolveDataParser(array $dataParsers) {
+        public function resolveDataParser(VehicleType $vehicleType) {
+            $dataParsers = $this->resolveDataParsers();
             //Get the class of the chosen vehicle type without it's namespace
-            $vehicleTypeClass = substr(get_class($this->vehicleType), strrpos(get_class($this->vehicleType), "\\") + 1);
+            $vehicleTypeClass = substr(get_class($vehicleType), strrpos(get_class($vehicleType), "\\") + 1);
 
-            //The fully qualified class name of the data parser belonging to this selected vehicle type
             $vehicleTypeDataParser = "{$this->getNamespace()}\\DataParsers\\{$vehicleTypeClass}DataParser";
 
-            //Loop through all the found (resolved) data parsers and select the right one out of it
-            for ($dataParsersIndex = 0; $dataParsersIndex < count($dataParsers); $dataParsersIndex++) {
-                if ($dataParsers[$dataParsersIndex] == $vehicleTypeDataParser) {
-                    $dataParser = new \ReflectionClass($dataParsers[$dataParsersIndex]);
+            $dataParsersCount = count($dataParsers);
+            for ($dataParserIndex = 0; $dataParserIndex < $dataParsersCount; $dataParserIndex++) {
+                if ($dataParsers[$dataParserIndex] == $vehicleTypeDataParser) {
+                    $dataParser = new \ReflectionClass($dataParsers[$dataParserIndex]);
                     return $dataParser->newInstance();
                 }
             }
             return null;
-        }
-
-        /**
-         * Retrieves the data from the resolved data parser belonging to the user selected vehicle type
-         *
-         * @param DataParser $dataParser The resolved data parser belonging to the chosen vehicle type
-         *
-         * @return array|int The resolved vehicle data belonging to the user's choices such as the vehicle type, fuel
-         *                   type, where the vehicle owner is living
-         */
-        public function getData(DataParser $dataParser) {
-            $data = $dataParser->resolveData($this->vehicleType, $this->vehicleOwner);
-            return $dataParser->parse($data, $this->vehicleType, $this->vehicleOwner);
         }
 
         /**

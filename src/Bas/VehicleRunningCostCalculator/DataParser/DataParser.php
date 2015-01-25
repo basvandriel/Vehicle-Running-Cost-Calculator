@@ -33,8 +33,22 @@
      *
      * @package Bas\VehicleRunningCostCalculator\DataParser
      */
-    interface DataParser
+    abstract class DataParser
     {
+        /**
+         * Retrieves the data from the resolved data parser belonging to the user selected vehicle type
+         *
+         * @param \Bas\VehicleRunningCostCalculator\Vehicle\VehicleType       $vehicleType
+         * @param \Bas\VehicleRunningCostCalculator\VehicleOwner\VehicleOwner $vehicleOwner
+         *
+         * @return array|int The resolved vehicle data belonging to the user's choices such as the vehicle type, fuel
+         *                   type, where the vehicle owner is living
+         */
+        public function getData(VehicleType $vehicleType, VehicleOwner $vehicleOwner) {
+            $data = $this->resolveData($vehicleType, $vehicleOwner);
+            return $this->parse($data, $vehicleType, $vehicleOwner);
+        }
+
         /**
          * Resolves the right data based on the vehicle type and vehicle owner's property's (not nessacery)
          *
@@ -43,7 +57,7 @@
          *
          * @return array The resolved data array for the selected vehicle type
          */
-        public function resolveData(VehicleType $vehicleType, VehicleOwner $vehicleOwner);
+        protected abstract function resolveData(VehicleType $vehicleType, VehicleOwner $vehicleOwner);
 
         /**
          * Parses the resolved data and returns the right data belonged on the vehicle type and vehicle owner's
@@ -57,5 +71,5 @@
          *
          * @return array|int The right data belonged on the vehicle type and vehicle owner's property's
          */
-        public function parse(array $resolvedData, VehicleType $vehicleType, VehicleOwner $vehicleOwner);
+        protected abstract function parse(array $resolvedData, VehicleType $vehicleType, VehicleOwner $vehicleOwner);
     }
