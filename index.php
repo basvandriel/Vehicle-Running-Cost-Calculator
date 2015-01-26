@@ -19,6 +19,7 @@
      * DEALINGS IN THE SOFTWARE.
      */
 
+    use Bas\VehicleRunningCostCalculator\DataParser\DataParserFactory as RoadTaxDataParserFactory;
     use Bas\VehicleRunningCostCalculator\Vehicle\FuelType;
     use Bas\VehicleRunningCostCalculator\VehicleOwner\Province;
 
@@ -48,9 +49,8 @@
                                                                                     Province::GELDERLAND,
                                                                                     false);
 
-    $factory     = new \Bas\VehicleRunningCostCalculator\DataParser\DataParserFactory();
+    $dataParser = RoadTaxDataParserFactory::resolveDataParser($vehicle);
 
-    $dataParser = $factory->resolveDataParser($vehicle);
     $data = $dataParser->getData($vehicle, $vehicleOwner);
 
     var_dump($data);
