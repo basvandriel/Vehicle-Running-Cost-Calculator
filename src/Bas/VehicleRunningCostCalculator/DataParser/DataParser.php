@@ -38,8 +38,8 @@
         /**
          * Retrieves the data from the resolved data parser belonging to the user selected vehicle type
          *
-         * @param \Bas\VehicleRunningCostCalculator\Vehicle\VehicleType       $vehicleType
-         * @param \Bas\VehicleRunningCostCalculator\VehicleOwner\VehicleOwner $vehicleOwner
+         * @param VehicleType  $vehicleType  The user selected vehicle
+         * @param VehicleOwner $vehicleOwner The vehicle's owner.
          *
          * @return array|int The resolved vehicle data belonging to the user's choices such as the vehicle type, fuel
          *                   type, where the vehicle owner is living
