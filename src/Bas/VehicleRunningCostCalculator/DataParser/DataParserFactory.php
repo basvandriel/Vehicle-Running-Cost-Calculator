@@ -45,39 +45,17 @@
     {
 
         /**
-         * Retrieves the full qualified class names of every vehicle type data parser
-         *
-         * @return array The full qualified class names of every vehicle type data parser
-         */
-        private function resolveDataParsers() {
-            $dataParsers = [];
-            foreach (new \DirectoryIterator(__DIR__ . "\\DataParsers") as $dataParser) {
-                if ($dataParser->isDot() || $dataParser->isDir()) {
-                    continue;
-                }
-                $dataParsers[] = "{$this->getNamespace()}\\DataParsers\\{$dataParser->getBasename(".php")}";
-            }
-            return $dataParsers;
-        }
-
-        /**
          * Resolves the instance of the right data parser belonging to the selected vehicle type
          *
-         * @param VehicleType $vehicleType
+         * @param VehicleType $vehicleType The user selected vehicle type
          *
          * @return DataParser The resolved data parser belonging to the user selected vehicle type
          */
         public function resolveDataParser(VehicleType $vehicleType) {
-            $dataParsers = $this->resolveDataParsers();
-            $vehicleTypeClass = substr(get_class($vehicleType), strrpos(get_class($vehicleType), "\\") + 1);
+            $vehicleTypeClass      = substr(get_class($vehicleType), strrpos(get_class($vehicleType), "\\") + 1);
             $vehicleTypeDataParser = "{$this->getNamespace()}\\DataParsers\\{$vehicleTypeClass}DataParser";
-            $dataParsersCount = count($dataParsers);
-            for ($dataParserIndex = 0; $dataParserIndex < $dataParsersCount; $dataParserIndex++) {
-                if ($dataParsers[$dataParserIndex] !== $vehicleTypeDataParser) {
-                    continue;
-                }
-                $dataParser = new \ReflectionClass($dataParsers[$dataParserIndex]);
-                return $dataParser->newInstance();
+            if (class_exists($vehicleTypeDataParser)) {
+                return new $vehicleTypeDataParser;
             }
             return null;
         }
