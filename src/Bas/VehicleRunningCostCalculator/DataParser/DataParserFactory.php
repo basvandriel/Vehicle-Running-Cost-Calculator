@@ -49,15 +49,17 @@
          *
          * @param VehicleType $vehicleType The user selected vehicle type
          *
+         * @throws \Exception When it can't find the data parser class
+         *
          * @return DataParser The resolved data parser belonging to the user selected vehicle type
          */
         public function resolveDataParser(VehicleType $vehicleType) {
             $vehicleTypeClass      = substr(get_class($vehicleType), strrpos(get_class($vehicleType), "\\") + 1);
             $vehicleTypeDataParser = "{$this->getNamespace()}\\DataParsers\\{$vehicleTypeClass}DataParser";
-            if (class_exists($vehicleTypeDataParser)) {
-                return new $vehicleTypeDataParser;
+            if (!class_exists($vehicleTypeDataParser)) {
+                throw new \Exception("Couldn't find the data parser class for the vehicle type");
             }
-            return null;
+            return new $vehicleTypeDataParser;
         }
 
         /**
