@@ -71,7 +71,7 @@
             /**
              * @type PassengerCar $vehicleType The passenger car vehicle type
              */
-            $province = strtolower(Province::getProvinceName($vehicleOwner->getProvince()));
+            $province = strtolower(Province::getName($vehicleOwner->getProvince()));
 
             if (!isset($resolvedData[$province])) {
                 throw new \Exception("Cant find province!");

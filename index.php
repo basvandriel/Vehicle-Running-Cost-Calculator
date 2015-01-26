@@ -19,8 +19,6 @@
      * DEALINGS IN THE SOFTWARE.
      */
 
-    use Bas\VehicleRunningCostCalculator\DataParser\DataParserFactory as RoadTaxDataParserFactory;
-    use Bas\VehicleRunningCostCalculator\Vehicle\FuelType;
     use Bas\VehicleRunningCostCalculator\VehicleOwner\Province;
 
     require_once "src/Bas/VehicleRunningCostCalculator/DataParser/DataParser.php";
@@ -41,18 +39,16 @@
     require_once "src/Bas/VehicleRunningCostCalculator/Vehicle/Vehicles/Van/Vans/DeliveryVan.php";
     require_once "src/Bas/VehicleRunningCostCalculator/Vehicle/Vehicles/MotorCycle/Motorcycle.php";
 
-    $vehicle = new \Bas\VehicleRunningCostCalculator\Vehicle\Vehicles\Van\Vans\DeliveryVan(FuelType::BENZINE,
-                                                                                           900,
-                                                                                           false);
+    var_dump(Province::getName(Province::GELDERLAND));
 
-    $vehicleOwner = new \Bas\VehicleRunningCostCalculator\VehicleOwner\VehicleOwner($vehicle,
-                                                                                    Province::GELDERLAND,
-                                                                                    false);
+    /*    $vehicle = new \Bas\VehicleRunningCostCalculator\Vehicle\Vehicles\Van\Vans\DeliveryVan(FuelType::BENZINE, 900, false);
 
-    $dataParser = RoadTaxDataParserFactory::resolve($vehicle);
+        $vehicleOwner = new \Bas\VehicleRunningCostCalculator\VehicleOwner\VehicleOwner($vehicle, Province::GELDERLAND, false);
 
-    $data = $dataParser->getData($vehicle, $vehicleOwner);
+        $dataParser = RoadTaxDataParserFactory::resolve($vehicle);
 
-    var_dump($data);
+        $data = $dataParser->getData($vehicle, $vehicleOwner);
+
+        var_dump($data);*/
 
 

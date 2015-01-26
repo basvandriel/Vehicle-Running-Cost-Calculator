@@ -99,7 +99,7 @@
          *
          * @return string The province name
          */
-        public static function getProvinceName($province) {
+        public static function getName($province) {
             return array_flip((new \ReflectionClass(new self))->getConstants())[$province];
         }
     }

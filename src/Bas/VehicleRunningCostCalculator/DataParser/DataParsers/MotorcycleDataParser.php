@@ -60,7 +60,7 @@
          * @throws \Exception
          */
         public function parse(array $resolvedData, VehicleType $vehicleType, VehicleOwner $vehicleOwner) {
-            $province = strtolower(Province::getProvinceName($vehicleOwner->getProvince()));
+            $province = strtolower(Province::getName($vehicleOwner->getProvince()));
             if (!isset($resolvedData[$province])) {
                 throw new \Exception("Can't find the province key");
             }
