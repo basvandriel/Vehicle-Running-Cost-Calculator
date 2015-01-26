@@ -27,8 +27,8 @@
     use Bas\VehicleRunningCostCalculator\Vehicle\VehicleType;
 
     /**
-     * A factory class to retrieve the right data for the selected vehicle type based on the following (specific) user's
-     * property's:
+     * A factory class to retrieve the right data parser for the selected vehicle type based on the following
+     * (specific) user's property's:
      *
      * - The vehicle type
      * - The vehicle's fuel type
