@@ -60,7 +60,7 @@
          *
          * @return string The fuel type's name
          */
-        public static function getFuelTypeName($fuelType) {
+        public static function getName($fuelType) {
             return array_flip((new \ReflectionClass(new self))->getConstants())[$fuelType];
         }
     }

@@ -75,7 +75,7 @@
              * @type DeliveryVan $vehicleType
              */
             $weight   = $vehicleType->getWeight();
-            $fuelType = strtolower(FuelType::getFuelTypeName($vehicleType->getFuelType()));
+            $fuelType = strtolower(FuelType::getName($vehicleType->getFuelType()));
 
             if ($vehicleOwner->isDisabled() || $vehicleType->isCommercial()) {
                 return $data = $resolvedData[DataPropertyResolver::resolveWeightClass($resolvedData, $weight)];

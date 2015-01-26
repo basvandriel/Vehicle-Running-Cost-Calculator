@@ -78,7 +78,7 @@
             }
             $data     = $resolvedData[$province];
             $data     = $data[DataPropertyResolver::resolveWeightClass($data, $vehicleType->getWeight())];
-            $fuelType = strtolower(FuelType::getFuelTypeName($vehicleType->getFuelType()));
+            $fuelType = strtolower(FuelType::getName($vehicleType->getFuelType()));
 
             if (!isset($data[$fuelType])) {
                 throw new \Exception("Cant find fuel type");
