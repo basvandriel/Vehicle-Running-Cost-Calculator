@@ -30,7 +30,7 @@
      * @copyright 2015 Bas van Driel
      * @license   MIT
      */
-    class Province
+    final class Province
     {
         /**
          * Defines the province Noord Holland

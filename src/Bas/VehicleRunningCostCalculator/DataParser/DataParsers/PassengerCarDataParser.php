@@ -50,7 +50,7 @@
          *
          * @return array The resolved data belonged to the passenger car
          */
-        public function resolveData(VehicleType $vehicleType, VehicleOwner $vehicleOwner) {
+        protected function resolveData(VehicleType $vehicleType, VehicleOwner $vehicleOwner) {
             return require "var/road-tax-data/PassengerCarData.php";
         }
 
@@ -67,7 +67,7 @@
          *
          * @throws \Exception When it can't find the data in the resolved data array
          */
-        public function parse(array $resolvedData, VehicleType $vehicleType, VehicleOwner $vehicleOwner) {
+        protected function parse(array $resolvedData, VehicleType $vehicleType, VehicleOwner $vehicleOwner) {
             /**
              * @type PassengerCar $vehicleType The passenger car vehicle type
              */

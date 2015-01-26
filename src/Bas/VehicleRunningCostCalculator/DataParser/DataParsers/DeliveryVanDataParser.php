@@ -49,7 +49,7 @@
          *
          * @return array The resolved data array for the selected vehicle type
          */
-        public function resolveData(VehicleType $vehicleType, VehicleOwner $vehicleOwner) {
+        protected function resolveData(VehicleType $vehicleType, VehicleOwner $vehicleOwner) {
             /**
              * @type DeliveryVan $vehicleType
              */
@@ -70,7 +70,7 @@
          *
          * @return int
          */
-        public function parse(array $resolvedData, VehicleType $vehicleType, VehicleOwner $vehicleOwner) {
+        protected function parse(array $resolvedData, VehicleType $vehicleType, VehicleOwner $vehicleOwner) {
             /**
              * @type DeliveryVan $vehicleType
              */

@@ -47,7 +47,7 @@
          *
          * @return array The resolved data array for the selected vehicle type
          */
-        public function resolveData(VehicleType $vehicleType, VehicleOwner $vehicleOwner) {
+        protected function resolveData(VehicleType $vehicleType, VehicleOwner $vehicleOwner) {
             return require "var/road-tax-data/MotorcycleData.php";
         }
 
@@ -59,7 +59,7 @@
          * @return int
          * @throws \Exception
          */
-        public function parse(array $resolvedData, VehicleType $vehicleType, VehicleOwner $vehicleOwner) {
+        protected function parse(array $resolvedData, VehicleType $vehicleType, VehicleOwner $vehicleOwner) {
             $province = strtolower(Province::getName($vehicleOwner->getProvince()));
             if (!isset($resolvedData[$province])) {
                 throw new \Exception("Can't find the province key");

@@ -31,7 +31,7 @@
      * @copyright 2015 Bas van Driel
      * @license   MIT
      */
-    class FuelType
+    final class FuelType
     {
         /**
          * Defines the benzine fuel type
