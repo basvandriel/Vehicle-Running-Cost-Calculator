@@ -49,7 +49,7 @@
                                                                                     Province::GELDERLAND,
                                                                                     false);
 
-    $dataParser = RoadTaxDataParserFactory::resolveDataParser($vehicle);
+    $dataParser = RoadTaxDataParserFactory::resolve($vehicle);
 
     $data = $dataParser->getData($vehicle, $vehicleOwner);
 

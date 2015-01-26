@@ -53,7 +53,7 @@
          *
          * @return DataParser The resolved data parser belonging to the user selected vehicle type
          */
-        public static function resolveDataParser(VehicleType $vehicleType) {
+        public static function resolve(VehicleType $vehicleType) {
             $namespace             = substr(get_class(new self), 0, strrpos(get_class(new self), "\\"));
             $vehicleTypeClass      = substr(get_class($vehicleType), strrpos(get_class($vehicleType), "\\") + 1);
             $vehicleTypeDataParser = "{$namespace}\\DataParsers\\{$vehicleTypeClass}DataParser";
