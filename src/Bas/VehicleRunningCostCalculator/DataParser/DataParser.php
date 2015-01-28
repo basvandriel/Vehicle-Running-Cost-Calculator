@@ -43,8 +43,7 @@
          *                   type, where the vehicle owner is living
          */
         public function getData(VehicleOwner $vehicleOwner) {
-            $data = $this->resolveData($vehicleOwner);
-            return $this->parse($data, $vehicleOwner);
+            return $this->parse($this->resolveData($vehicleOwner), $vehicleOwner);
         }
 
         /**
@@ -54,7 +53,11 @@
          *
          * @return array The resolved data array for the selected vehicle type
          */
-        protected abstract function resolveData(VehicleOwner $vehicleOwner);
+        private function resolveData(VehicleOwner $vehicleOwner) {
+            $vehicleType      = $vehicleOwner->getVehicleType();
+            $vehicleTypeClass = substr(get_class($vehicleType), strrpos(get_class($vehicleType), "\\") + 1);
+            return require("var/road-tax-data/{$vehicleTypeClass}Data.php");
+        }
 
         /**
          * Parses the resolved data and returns the right data belonged on the vehicle type and vehicle owner's

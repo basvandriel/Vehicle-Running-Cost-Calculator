@@ -42,17 +42,6 @@
     {
 
         /**
-         * Resolves the right data based on the vehicle type and vehicle owner's property's
-         *
-         * @param VehicleOwner $vehicleOwner The vehicle owner belonging to the vehicle type
-         *
-         * @return array The resolved data array for the selected vehicle type
-         */
-        protected function resolveData(VehicleOwner $vehicleOwner) {
-            return require "var/road-tax-data/CampingCarData.php";
-        }
-
-        /**
          * Parses the resolved data and returns the right data belonged on the vehicle type and vehicle owner's
          * property's
          *

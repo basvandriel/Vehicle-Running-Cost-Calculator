@@ -40,19 +40,7 @@
      */
     class PassengerCarDataParser extends DataParser
     {
-
-        /**
-         * Resolves the correct data belonging to the passenger car
-         *
-         * @param VehicleOwner $vehicleOwner The owner of the user's chosen vehicle
-         *
-         * @return array The resolved data belonged to the passenger car
-         */
-        protected function resolveData(VehicleOwner $vehicleOwner) {
-            return require "var/road-tax-data/PassengerCarData.php";
-        }
-
-
+        
         /**
          * Parses the resolved data and returns the right data based on the user's input
          *

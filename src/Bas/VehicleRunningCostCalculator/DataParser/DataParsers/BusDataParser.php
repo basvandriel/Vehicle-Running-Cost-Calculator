@@ -46,9 +46,9 @@
          *
          * @return array The resolved data array for the selected vehicle type
          */
-        protected function resolveData(VehicleOwner $vehicleOwner) {
-            return require "var/road-tax-data/BusData.php";
-        }
+        /*        protected function resolveData(VehicleOwner $vehicleOwner) {
+                    return require "var/road-tax-data/BusData.php";
+                }*/
 
         /**
          * Parses the resolved data and returns the right data belonged on the vehicle type and vehicle owner's

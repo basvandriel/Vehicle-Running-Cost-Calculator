@@ -41,26 +41,6 @@
     {
 
         /**
-         * Resolves the right data based on the vehicle type in array format
-         *
-         * @param VehicleOwner $vehicleOwner
-         *
-         * @return array The resolved data array for the selected vehicle type
-         */
-        protected function resolveData(VehicleOwner $vehicleOwner) {
-            /**
-             * @type DeliveryVan $vehicleType
-             */
-            $vehicleType = $vehicleOwner->getVehicleType();
-            if ($vehicleOwner->isDisabled()) {
-                return require "var/road-tax-data/DeliveryVanDisabledData.php";
-            } elseif ($vehicleType->isCommercial()) {
-                return require "var/road-tax-data/DeliveryVanCommercialData.php";
-            }
-            return require "var/road-tax-data/DeliveryVanPassengerData.php";
-        }
-
-        /**
          * @param array        $resolvedData The resolved data array for the selected vehicle type
          *
          * @param VehicleOwner $vehicleOwner The vehicle owner belonging to the vehicle type
@@ -75,11 +55,20 @@
              */
             $vehicleType = $vehicleOwner->getVehicleType();
             $weight      = $vehicleType->getWeight();
+
+            if ($vehicleOwner->isDisabled()) {
+                $data = $resolvedData['disabled'];
+            } elseif ($vehicleType->isCommercial()) {
+                $data = $resolvedData['commercial'];
+            } else {
+                $data = $resolvedData['passenger'];
+            }
+
             if ($vehicleOwner->isDisabled() || $vehicleType->isCommercial()) {
-                return $resolvedData[DataPropertyResolver::resolveWeightClass($resolvedData, $weight)];
+                return $data[DataPropertyResolver::resolveWeightClass($data, $weight)];
             }
             $fuelType = strtolower(FuelType::getName($vehicleType->getFuelType()));
-            $data     = $resolvedData[DataPropertyResolver::resolveWeightClass($resolvedData, $weight)];
+            $data     = $data[DataPropertyResolver::resolveWeightClass($data, $weight)];
             if (!isset($data[$fuelType])) {
                 throw new \Exception("Cant find the fuel type");
             }

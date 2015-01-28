@@ -39,17 +39,6 @@
     {
 
         /**
-         * Resolves the right data based on the vehicle type in array format
-         *
-         * @param \Bas\VehicleRunningCostCalculator\VehicleOwner\VehicleOwner $vehicleOwner
-         *
-         * @return array The resolved data array for the selected vehicle type
-         */
-        protected function resolveData(VehicleOwner $vehicleOwner) {
-            return require "var/road-tax-data/MotorcycleData.php";
-        }
-
-        /**
          * @param array        $resolvedData The resolved data array for the selected vehicle type
          * @param VehicleOwner $vehicleOwner The vehicle owner belonging to the vehicle type
          *
