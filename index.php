@@ -21,16 +21,19 @@
 
     spl_autoload_register(function ($class) {
         $class = str_replace('\\', DIRECTORY_SEPARATOR, $class);
-        require __DIR__ . '/src/' . $class . '.php';
+        require __DIR__ . '\\src\\' . $class . '.php';
     });
 
     use Bas\VehicleRunningCostCalculator\DataParser\DataParserFactory;
     use Bas\VehicleRunningCostCalculator\Vehicle\FuelType;
+    use Bas\VehicleRunningCostCalculator\Vehicle\Vehicles\Bus\Bus;
+    use Bas\VehicleRunningCostCalculator\Vehicle\Vehicles\Car\Cars\CampingCar;
     use Bas\VehicleRunningCostCalculator\Vehicle\Vehicles\Van\Vans\DeliveryVan;
     use Bas\VehicleRunningCostCalculator\VehicleOwner\Province;
     use Bas\VehicleRunningCostCalculator\VehicleOwner\VehicleOwner;
 
-    $vehicle      = new DeliveryVan(FuelType::BENZINE, 200, false);
+    //$vehicle      = new CampingCar(FuelType::BENZINE, 600, true);
+    $vehicle = new Bus(600);
     $vehicleOwner = new VehicleOwner($vehicle, Province::GELDERLAND, false);
 
     $dataParser = DataParserFactory::resolve($vehicle);

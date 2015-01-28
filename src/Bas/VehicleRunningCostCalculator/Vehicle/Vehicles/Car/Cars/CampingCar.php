@@ -24,7 +24,7 @@
     /**
      * Use the "Car" class for polymorphism
      */
-    use Bas\VehicleRunningCostCalculator\Vehicle\Car\Car;
+    use Bas\VehicleRunningCostCalculator\Vehicle\Vehicles\Car\Car;
 
 
     /**

@@ -19,7 +19,7 @@
      * DEALINGS IN THE SOFTWARE.
      */
 
-    namespace Bas\VehicleRunningCostCalculator\Vehicle\Car;
+    namespace Bas\VehicleRunningCostCalculator\Vehicle\Vehicles\Car;
 
     /**
      * Use the "VehicleType" class for polymorphism
