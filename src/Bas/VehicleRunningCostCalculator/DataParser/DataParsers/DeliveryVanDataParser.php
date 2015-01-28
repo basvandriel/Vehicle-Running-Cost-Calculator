@@ -25,7 +25,6 @@
     use Bas\VehicleRunningCostCalculator\DataParser\DataPropertyResolver;
     use Bas\VehicleRunningCostCalculator\Vehicle\FuelType;
     use Bas\VehicleRunningCostCalculator\Vehicle\Vehicles\Van\Vans\DeliveryVan;
-    use Bas\VehicleRunningCostCalculator\Vehicle\VehicleType;
     use Bas\VehicleRunningCostCalculator\VehicleOwner\VehicleOwner;
 
 
@@ -44,15 +43,15 @@
         /**
          * Resolves the right data based on the vehicle type in array format
          *
-         * @param \Bas\VehicleRunningCostCalculator\Vehicle\VehicleType       $vehicleType
-         * @param \Bas\VehicleRunningCostCalculator\VehicleOwner\VehicleOwner $vehicleOwner
+         * @param VehicleOwner $vehicleOwner
          *
          * @return array The resolved data array for the selected vehicle type
          */
-        protected function resolveData(VehicleType $vehicleType, VehicleOwner $vehicleOwner) {
+        protected function resolveData(VehicleOwner $vehicleOwner) {
             /**
              * @type DeliveryVan $vehicleType
              */
+            $vehicleType = $vehicleOwner->getVehicleType();
             if ($vehicleOwner->isDisabled()) {
                 return require "var/road-tax-data/DeliveryVanDisabledData.php";
             } elseif ($vehicleType->isCommercial()) {
@@ -63,19 +62,20 @@
 
         /**
          * @param array        $resolvedData The resolved data array for the selected vehicle type
-         * @param VehicleType  $vehicleType  The selected vehicle type
+         *
          * @param VehicleOwner $vehicleOwner The vehicle owner belonging to the vehicle type
          *
          * @throws \Exception
          *
          * @return int
          */
-        protected function parse(array $resolvedData, VehicleType $vehicleType, VehicleOwner $vehicleOwner) {
+        protected function parse(array $resolvedData, VehicleOwner $vehicleOwner) {
             /**
              * @type DeliveryVan $vehicleType
              */
-            $weight   = $vehicleType->getWeight();
-            $fuelType = strtolower(FuelType::getName($vehicleType->getFuelType()));
+            $vehicleType = $vehicleOwner->getVehicleType();
+            $weight      = $vehicleType->getWeight();
+            $fuelType    = strtolower(FuelType::getName($vehicleType->getFuelType()));
 
             if ($vehicleOwner->isDisabled() || $vehicleType->isCommercial()) {
                 return $data = $resolvedData[DataPropertyResolver::resolveWeightClass($resolvedData, $weight)];

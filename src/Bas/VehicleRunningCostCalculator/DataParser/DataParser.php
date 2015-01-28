@@ -50,26 +50,24 @@
         }
 
         /**
-         * Resolves the right data based on the vehicle type and vehicle owner's property's (not nessacery)
+         * Resolves the right data based on the vehicle type and vehicle owner's property's
          *
-         * @param VehicleType  $vehicleType  The selected vehicle type
          * @param VehicleOwner $vehicleOwner The vehicle owner belonging to the vehicle type
          *
          * @return array The resolved data array for the selected vehicle type
          */
-        protected abstract function resolveData(VehicleType $vehicleType, VehicleOwner $vehicleOwner);
+        protected abstract function resolveData(VehicleOwner $vehicleOwner);
 
         /**
          * Parses the resolved data and returns the right data belonged on the vehicle type and vehicle owner's
          * property's
          *
          * @param array        $resolvedData The resolved data array for the selected vehicle type
-         * @param VehicleType  $vehicleType  The selected vehicle type
          * @param VehicleOwner $vehicleOwner The vehicle owner belonging to the vehicle type
          *
          * @throws \Exception When it can't find the data in the resolved data array
          *
          * @return array|int The right data belonged on the vehicle type and vehicle owner's property's
          */
-        protected abstract function parse(array $resolvedData, VehicleType $vehicleType, VehicleOwner $vehicleOwner);
+        protected abstract function parse(array $resolvedData, VehicleOwner $vehicleOwner);
     }

@@ -25,7 +25,6 @@
     use Bas\VehicleRunningCostCalculator\DataParser\DataPropertyResolver;
     use Bas\VehicleRunningCostCalculator\Vehicle\FuelType;
     use Bas\VehicleRunningCostCalculator\Vehicle\Vehicles\Car\Cars\PassengerCar;
-    use Bas\VehicleRunningCostCalculator\Vehicle\VehicleType;
     use Bas\VehicleRunningCostCalculator\VehicleOwner\Province;
     use Bas\VehicleRunningCostCalculator\VehicleOwner\VehicleOwner;
 
@@ -45,12 +44,11 @@
         /**
          * Resolves the correct data belonging to the passenger car
          *
-         * @param VehicleType  $vehicleType  The user's chosen vehicle type
          * @param VehicleOwner $vehicleOwner The owner of the user's chosen vehicle
          *
          * @return array The resolved data belonged to the passenger car
          */
-        protected function resolveData(VehicleType $vehicleType, VehicleOwner $vehicleOwner) {
+        protected function resolveData(VehicleOwner $vehicleOwner) {
             return require "var/road-tax-data/PassengerCarData.php";
         }
 
@@ -59,7 +57,6 @@
          * Parses the resolved data and returns the right data based on the user's input
          *
          * @param array        $resolvedData The resolved data array for the selected vehicle type
-         * @param VehicleType  $vehicleType  The selected vehicle type
          * @param VehicleOwner $vehicleOwner The vehicle owner belonging to the vehicle type
          *
          * @return int|float The price the user has to pay for it's vehicle type with it's specific fuel type, vehicle
@@ -67,7 +64,7 @@
          *
          * @throws \Exception When it can't find the data in the resolved data array
          */
-        protected function parse(array $resolvedData, VehicleType $vehicleType, VehicleOwner $vehicleOwner) {
+        protected function parse(array $resolvedData, VehicleOwner $vehicleOwner) {
             /**
              * @type PassengerCar $vehicleType The passenger car vehicle type
              */

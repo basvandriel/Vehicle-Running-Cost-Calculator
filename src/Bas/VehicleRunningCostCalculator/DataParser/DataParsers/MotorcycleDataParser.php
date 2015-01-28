@@ -42,24 +42,22 @@
         /**
          * Resolves the right data based on the vehicle type in array format
          *
-         * @param \Bas\VehicleRunningCostCalculator\Vehicle\VehicleType       $vehicleType
          * @param \Bas\VehicleRunningCostCalculator\VehicleOwner\VehicleOwner $vehicleOwner
          *
          * @return array The resolved data array for the selected vehicle type
          */
-        protected function resolveData(VehicleType $vehicleType, VehicleOwner $vehicleOwner) {
+        protected function resolveData(VehicleOwner $vehicleOwner) {
             return require "var/road-tax-data/MotorcycleData.php";
         }
 
         /**
          * @param array        $resolvedData The resolved data array for the selected vehicle type
-         * @param VehicleType  $vehicleType  The selected vehicle type
          * @param VehicleOwner $vehicleOwner The vehicle owner belonging to the vehicle type
          *
          * @return int
          * @throws \Exception
          */
-        protected function parse(array $resolvedData, VehicleType $vehicleType, VehicleOwner $vehicleOwner) {
+        protected function parse(array $resolvedData, VehicleOwner $vehicleOwner) {
             $province = strtolower(Province::getName($vehicleOwner->getProvince()));
             if (!isset($resolvedData[$province])) {
                 throw new \Exception("Can't find the province key");
