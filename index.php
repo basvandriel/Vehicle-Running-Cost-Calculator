@@ -34,6 +34,6 @@
     $vehicleOwner = new VehicleOwner($vehicle, Province::GELDERLAND, false);
 
     $dataParser = DataParserFactory::resolve($vehicle);
-    $data       = $dataParser->getData($vehicle, $vehicleOwner);
+    $data       = $dataParser->getData($vehicleOwner);
 
     var_dump($data);

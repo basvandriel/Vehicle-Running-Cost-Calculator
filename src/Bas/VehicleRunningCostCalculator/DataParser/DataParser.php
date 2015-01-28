@@ -24,7 +24,6 @@
     /**
      * Use the "VehicleType" and "VehicleOwner" class for dependency injection
      */
-    use Bas\VehicleRunningCostCalculator\Vehicle\VehicleType;
     use Bas\VehicleRunningCostCalculator\VehicleOwner\VehicleOwner;
 
 
@@ -36,17 +35,16 @@
     abstract class DataParser
     {
         /**
-         * Retrieves the data from the resolved data parser belonging to the user selected vehicle type
+         * Retrieves the data from the resolved data parser belonging to the vehicle owner's property's
          *
-         * @param VehicleType  $vehicleType  The user selected vehicle
          * @param VehicleOwner $vehicleOwner The vehicle's owner.
          *
          * @return array|int The resolved vehicle data belonging to the user's choices such as the vehicle type, fuel
          *                   type, where the vehicle owner is living
          */
-        public function getData(VehicleType $vehicleType, VehicleOwner $vehicleOwner) {
-            $data = $this->resolveData($vehicleType, $vehicleOwner);
-            return $this->parse($data, $vehicleType, $vehicleOwner);
+        public function getData(VehicleOwner $vehicleOwner) {
+            $data = $this->resolveData($vehicleOwner);
+            return $this->parse($data, $vehicleOwner);
         }
 
         /**
