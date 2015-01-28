@@ -24,13 +24,13 @@
         require __DIR__ . '/src/' . $class . '.php';
     });
 
-    use Bas\VehicleRunningCostCalculator\Vehicle\FuelType;
-    use Bas\VehicleRunningCostCalculator\VehicleOwner\Province;
-    use Bas\VehicleRunningCostCalculator\Vehicle\Vehicles\Van\Vans\DeliveryVan;
-    use Bas\VehicleRunningCostCalculator\VehicleOwner\VehicleOwner;
     use Bas\VehicleRunningCostCalculator\DataParser\DataParserFactory;
+    use Bas\VehicleRunningCostCalculator\Vehicle\FuelType;
+    use Bas\VehicleRunningCostCalculator\Vehicle\Vehicles\Van\Vans\DeliveryVan;
+    use Bas\VehicleRunningCostCalculator\VehicleOwner\Province;
+    use Bas\VehicleRunningCostCalculator\VehicleOwner\VehicleOwner;
 
-    $vehicle      = new DeliveryVan(FuelType::BENZINE, 900, false);
+    $vehicle      = new DeliveryVan(FuelType::BENZINE, 200, false);
     $vehicleOwner = new VehicleOwner($vehicle, Province::GELDERLAND, false);
 
     $dataParser = DataParserFactory::resolve($vehicle);

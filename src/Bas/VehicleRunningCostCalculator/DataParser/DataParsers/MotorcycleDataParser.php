@@ -22,7 +22,6 @@
     namespace Bas\VehicleRunningCostCalculator\DataParser\DataParsers;
 
     use Bas\VehicleRunningCostCalculator\DataParser\DataParser;
-    use Bas\VehicleRunningCostCalculator\Vehicle\VehicleType;
     use Bas\VehicleRunningCostCalculator\VehicleOwner\Province;
     use Bas\VehicleRunningCostCalculator\VehicleOwner\VehicleOwner;
 
@@ -62,7 +61,6 @@
             if (!isset($resolvedData[$province])) {
                 throw new \Exception("Can't find the province key");
             }
-            $data = $resolvedData[$province];
-            return $data;
+            return $resolvedData[$province];
         }
     }

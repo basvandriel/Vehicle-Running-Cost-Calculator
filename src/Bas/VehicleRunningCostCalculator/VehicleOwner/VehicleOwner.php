@@ -64,7 +64,7 @@
          * @param bool        $disabled    If the vehicle owner's is handicapped, this is for the delivery van
          *                                 calculations
          */
-        public function __construct(VehicleType $vehicleType, $province, $disabled) {
+        public function __construct(VehicleType $vehicleType, $province = null, $disabled) {
             $this->vehicleType = $vehicleType;
             $this->province    = $province;
             $this->disabled    = $disabled;

@@ -81,6 +81,6 @@
                 throw new \Exception("Cant find fuel type");
             };
 
-            return $data = $data[$fuelType];
+            return $data[$fuelType];
         }
     }
