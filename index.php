@@ -19,33 +19,21 @@
      * DEALINGS IN THE SOFTWARE.
      */
 
+    spl_autoload_register(function ($class) {
+        $class = str_replace('\\', DIRECTORY_SEPARATOR, $class);
+        require __DIR__ . '/src/' . $class . '.php';
+    });
+
     use Bas\VehicleRunningCostCalculator\Vehicle\FuelType;
     use Bas\VehicleRunningCostCalculator\VehicleOwner\Province;
+    use Bas\VehicleRunningCostCalculator\Vehicle\Vehicles\Van\Vans\DeliveryVan;
+    use Bas\VehicleRunningCostCalculator\VehicleOwner\VehicleOwner;
+    use Bas\VehicleRunningCostCalculator\DataParser\DataParserFactory;
 
-    require_once "src/Bas/VehicleRunningCostCalculator/DataParser/DataParser.php";
-    require_once "src/Bas/VehicleRunningCostCalculator/DataParser/DataParserFactory.php";
-    require_once "src/Bas/VehicleRunningCostCalculator/DataParser/DataPropertyResolver.php";
-    require_once "src/Bas/VehicleRunningCostCalculator/DataParser/DataParsers/PassengerCarDataParser.php";
-    require_once "src/Bas/VehicleRunningCostCalculator/DataParser/DataParsers/MotorcycleDataParser.php";
-    require_once "src/Bas/VehicleRunningCostCalculator/DataParser/DataParsers/DeliveryVanDataParser.php";
+    $vehicle      = new DeliveryVan(FuelType::BENZINE, 900, false);
+    $vehicleOwner = new VehicleOwner($vehicle, Province::GELDERLAND, false);
 
-    require_once "src/Bas/VehicleRunningCostCalculator/VehicleOwner/VehicleOwner.php";
-    require_once "src/Bas/VehicleRunningCostCalculator/VehicleOwner/Province.php";
-
-    require_once "src/Bas/VehicleRunningCostCalculator/Vehicle/VehicleType.php";
-    require_once "src/Bas/VehicleRunningCostCalculator/Vehicle/FuelType.php";
-    require_once "src/Bas/VehicleRunningCostCalculator/Vehicle/Vehicles/Car/Car.php";
-    require_once "src/Bas/VehicleRunningCostCalculator/Vehicle/Vehicles/Car/Cars/PassengerCar.php";
-    require_once "src/Bas/VehicleRunningCostCalculator/Vehicle/Vehicles/Van/Van.php";
-    require_once "src/Bas/VehicleRunningCostCalculator/Vehicle/Vehicles/Van/Vans/DeliveryVan.php";
-    require_once "src/Bas/VehicleRunningCostCalculator/Vehicle/Vehicles/MotorCycle/Motorcycle.php";
-
-    $vehicle      = new \Bas\VehicleRunningCostCalculator\Vehicle\Vehicles\Van\Vans\DeliveryVan(FuelType::BENZINE, 900, false);
-    $vehicleOwner = new \Bas\VehicleRunningCostCalculator\VehicleOwner\VehicleOwner($vehicle, Province::GELDERLAND, false);
-
-    $dataParser = \Bas\VehicleRunningCostCalculator\DataParser\DataParserFactory::resolve($vehicle);
+    $dataParser = DataParserFactory::resolve($vehicle);
     $data       = $dataParser->getData($vehicle, $vehicleOwner);
 
     var_dump($data);
-
-
