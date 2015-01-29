@@ -27,9 +27,9 @@
 
 
     /**
+     * Defines a data parser for the bus vehicle type
      *
-     *
-     * @package   Bas\RoadTaxDataWriter
+     * @package   Bas\VehicleRunningCostCalculator\DataParser\DataParsers
      *
      * @author    Bas van Driel <basvandriel94@gmail.com>
      * @copyright 2015 Bas van Driel
@@ -39,12 +39,10 @@
     {
 
         /**
-         * Parses the resolved data and returns the right data belonged on the vehicle type and vehicle owner's
-         * property's
+         * Parses the resolved data for the bus vehicle and returns the right data
+         * belonged on this vehicle type and vehicle owner's property's
          *
          * @param array $resolvedData The resolved data array for the selected vehicle type
-         *
-         * @throws \Exception When it can't find the data in the resolved data array
          *
          * @return array|int The right data belonged on the vehicle type and vehicle owner's property's
          */
