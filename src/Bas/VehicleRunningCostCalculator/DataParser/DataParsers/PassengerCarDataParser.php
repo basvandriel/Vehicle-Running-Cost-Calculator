@@ -53,8 +53,9 @@
          */
         public function parse(array $resolvedData) {
             /**
-             * @type PassengerCar $vehicleType The passenger car vehicle type
+             * @type PassengerCar $vehicleType
              */
+            $vehicleType = $this->vehicleOwner->getVehicleType();
             $province = strtolower(Province::getName($this->vehicleOwner->getProvince()));
 
             if (!isset($resolvedData[$province])) {
