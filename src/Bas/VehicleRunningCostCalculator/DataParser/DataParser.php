@@ -24,6 +24,7 @@
     /**
      * Use the "VehicleType" and "VehicleOwner" class for dependency injection
      */
+    use Bas\VehicleRunningCostCalculator\Vehicle\VehicleType;
     use Bas\VehicleRunningCostCalculator\VehicleOwner\VehicleOwner;
 
 
@@ -41,10 +42,16 @@
         protected $vehicleOwner;
 
         /**
+         * @var VehicleType $vehicleType
+         */
+        protected $vehicleType;
+
+        /**
          * @param \Bas\VehicleRunningCostCalculator\VehicleOwner\VehicleOwner $vehicleOwner
          */
         public function __construct(VehicleOwner $vehicleOwner) {
             $this->vehicleOwner = $vehicleOwner;
+            $this->vehicleType  = $vehicleOwner->getVehicleType();
         }
 
         /**
