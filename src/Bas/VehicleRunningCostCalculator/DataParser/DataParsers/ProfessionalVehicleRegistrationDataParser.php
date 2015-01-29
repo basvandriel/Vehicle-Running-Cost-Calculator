@@ -22,53 +22,36 @@
     namespace Bas\VehicleRunningCostCalculator\DataParser\DataParsers;
 
     use Bas\VehicleRunningCostCalculator\DataParser\DataParser;
-    use Bas\VehicleRunningCostCalculator\DataParser\DataPropertyResolver;
-    use Bas\VehicleRunningCostCalculator\Vehicle\FuelType;
-    use Bas\VehicleRunningCostCalculator\Vehicle\Vehicles\Car\Cars\PassengerCar;
     use Bas\VehicleRunningCostCalculator\VehicleOwner\Province;
 
 
     /**
-     * Defines a data parser for the passenger car
+     * Defines a data parser for the professional vehicle registration vehicle type
      *
-     * @package   Bas\VehicleRunningCostCalculator\DataParserFactory\DataParsers
+     * @package   Bas\VehicleRunningCostCalculator\DataParser\DataParsers
      *
      * @author    Bas van Driel <basvandriel94@gmail.com>
      * @copyright 2015 Bas van Driel
      * @license   MIT
      */
-    class PassengerCarDataParser extends DataParser
+    class ProfessionalVehicleRegistrationDataParser extends DataParser
     {
 
         /**
-         * Parses the resolved data for the passenger car vehicle and returns the right data
+         * Parses the resolved data for the professional vehicle registration vehicle and returns the right data
          * belonged on this vehicle type and vehicle owner's property's
          *
          * @param array $resolvedData The resolved data array for the selected vehicle type
          *
-         * @return int|float The price the user has to pay for it's vehicle type with it's specific fuel type, vehicle
-         *                   weight and living province
+         * @throws \Exception When it can't find the province key data in the resolved data array
          *
-         * @throws \Exception When it can't find the data in the resolved data array
+         * @return array|int The right data belonged on the vehicle type and vehicle owner's property's
          */
         public function parse(array $resolvedData) {
-            /**
-             * @type PassengerCar $vehicleType
-             */
-            $vehicleType = $this->vehicleOwner->getVehicleType();
-            $province    = strtolower(Province::getName($this->vehicleOwner->getProvince()));
-
+            $province = strtolower(Province::getName($this->vehicleOwner->getProvince()));
             if (!isset($resolvedData[$province])) {
-                throw new \Exception("Cant find province!");
+                throw new \Exception("Cant find the province");
             }
-            $data     = $resolvedData[$province];
-            $data     = $data[DataPropertyResolver::resolveWeightClass($data, $vehicleType->getWeight())];
-            $fuelType = strtolower(FuelType::getName($vehicleType->getFuelType()));
-
-            if (!isset($data[$fuelType])) {
-                throw new \Exception("Cant find fuel type");
-            };
-
-            return $data[$fuelType];
+            return $resolvedData[$province];
         }
     }
