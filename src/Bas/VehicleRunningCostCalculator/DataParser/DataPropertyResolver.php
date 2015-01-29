@@ -23,7 +23,7 @@
 
 
     /**
-     *
+     * Defines the utility methods for resolving data properties for vehicle types
      *
      * @package   Bas\VehicleRunningCostCalculator\DataParser
      *
@@ -43,7 +43,7 @@
          * @return int The resolved weight class
          */
         public static function resolveWeightClass(array $data, $vehicleWeight) {
-            $weightClasses = array_keys($data);
+            $weightClasses      = array_keys($data);
             $weightClassesCount = count($weightClasses) - 1;
             for ($weightClassIndex = 0; $weightClassIndex < $weightClassesCount; $weightClassIndex++) {
                 $weightClass       = $weightClasses[$weightClassIndex];
