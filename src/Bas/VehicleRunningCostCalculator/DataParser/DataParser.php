@@ -37,17 +37,17 @@
     {
 
         /**
-         * @var VehicleOwner $vehicleOwner
+         * @var VehicleOwner $vehicleOwner The vehicle owner
          */
         protected $vehicleOwner;
 
         /**
-         * @var VehicleType $vehicleType
+         * @var VehicleType $vehicleType The vehicle of the vehicle owner
          */
         protected $vehicleType;
 
         /**
-         * @param \Bas\VehicleRunningCostCalculator\VehicleOwner\VehicleOwner $vehicleOwner
+         * @param VehicleOwner $vehicleOwner The vehicle owner
          */
         public function __construct(VehicleOwner $vehicleOwner) {
             $this->vehicleOwner = $vehicleOwner;
@@ -60,8 +60,7 @@
          * @return array The resolved data array for the selected vehicle type
          */
         public final function resolveData() {
-            $vehicleType      = $this->vehicleOwner->getVehicleType();
-            $vehicleTypeClass = substr(get_class($vehicleType), strrpos(get_class($vehicleType), "\\") + 1);
+            $vehicleTypeClass = substr(get_class($this->vehicleType), strrpos(get_class($this->vehicleType), "\\") + 1);
             return require("var/road-tax-data/{$vehicleTypeClass}Data.php");
         }
 

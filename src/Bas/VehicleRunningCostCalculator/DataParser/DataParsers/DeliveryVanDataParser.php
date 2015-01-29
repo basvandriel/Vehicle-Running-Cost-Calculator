@@ -51,7 +51,7 @@
             /**
              * @type DeliveryVan $vehicleType
              */
-            $vehicleType = $this->vehicleOwner->getVehicleType();
+            $vehicleType = $this->vehicleType;
             $weight      = $vehicleType->getWeight();
 
             if ($this->vehicleOwner->isDisabled()) {

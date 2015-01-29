@@ -55,7 +55,7 @@
             /**
              * @type CampingCar $vehicleType
              */
-            $vehicleType = $this->vehicleOwner->getVehicleType();
+            $vehicleType = $this->vehicleType;
             $data        = $resolvedData[$vehicleType->isRented()];
             $province    = strtolower(Province::getName($this->vehicleOwner->getProvince()));
 

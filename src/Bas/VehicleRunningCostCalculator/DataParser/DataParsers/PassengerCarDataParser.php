@@ -55,7 +55,7 @@
             /**
              * @type PassengerCar $vehicleType
              */
-            $vehicleType = $this->vehicleOwner->getVehicleType();
+            $vehicleType = $this->vehicleType;
             $province    = strtolower(Province::getName($this->vehicleOwner->getProvince()));
 
             if (!isset($resolvedData[$province])) {

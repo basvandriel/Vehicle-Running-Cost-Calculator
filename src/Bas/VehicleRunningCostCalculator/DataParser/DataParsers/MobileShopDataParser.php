@@ -52,7 +52,7 @@
             /**
              * @type MobileShop $vehicleType
              */
-            $vehicleType = $this->vehicleOwner->getVehicleType();
+            $vehicleType = $this->vehicleType;
             $weightClass = DataPropertyResolver::resolveWeightClass($resolvedData, $vehicleType->getWeight());
             return $resolvedData[$weightClass];
         }
