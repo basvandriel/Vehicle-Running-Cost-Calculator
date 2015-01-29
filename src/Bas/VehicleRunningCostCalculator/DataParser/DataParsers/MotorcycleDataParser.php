@@ -40,13 +40,12 @@
 
         /**
          * @param array        $resolvedData The resolved data array for the selected vehicle type
-         * @param VehicleOwner $vehicleOwner The vehicle owner belonging to the vehicle type
          *
          * @return int
          * @throws \Exception
          */
-        protected function parse(array $resolvedData, VehicleOwner $vehicleOwner) {
-            $province = strtolower(Province::getName($vehicleOwner->getProvince()));
+        public function parse(array $resolvedData) {
+            $province = strtolower(Province::getName($this->vehicleOwner->getProvince()));
             if (!isset($resolvedData[$province])) {
                 throw new \Exception("Can't find the province key");
             }

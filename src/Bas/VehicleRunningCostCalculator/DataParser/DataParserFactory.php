@@ -24,7 +24,7 @@
     /**
      * Use the "VehicleType" class for polymorphism
      */
-    use Bas\VehicleRunningCostCalculator\Vehicle\VehicleType;
+    use Bas\VehicleRunningCostCalculator\VehicleOwner\VehicleOwner;
 
     /**
      * A factory class to retrieve the right data parser for the selected vehicle type based on the following
@@ -45,21 +45,22 @@
     {
 
         /**
-         * Resolves the instance of the right data parser belonging to the selected vehicle type
+         * Resolves the instance of the right data parser belonging to the vehicle owner's vehicle
          *
-         * @param VehicleType $vehicleType The user selected vehicle type
+         * @param VehicleOwner $vehicleOwner The vehicle owner
+         *
+         * @return DataParser The resolved data parser belonging to the vehicle owner's vehicle
          *
          * @throws \Exception When it can't find the data parser class
-         *
-         * @return DataParser The resolved data parser belonging to the user selected vehicle type
          */
-        public static function resolve(VehicleType $vehicleType) {
+        public static function resolve(VehicleOwner $vehicleOwner) {
+            $vehicleType           = $vehicleOwner->getVehicleType();
             $namespace             = substr(get_class(new self), 0, strrpos(get_class(new self), "\\"));
             $vehicleTypeClass      = substr(get_class($vehicleType), strrpos(get_class($vehicleType), "\\") + 1);
             $vehicleTypeDataParser = "{$namespace}\\DataParsers\\{$vehicleTypeClass}DataParser";
             if (!class_exists($vehicleTypeDataParser)) {
                 throw new \Exception("Couldn't find the data parser class for the vehicle type");
             }
-            return new $vehicleTypeDataParser;
+            return new $vehicleTypeDataParser($vehicleOwner);
         }
     }

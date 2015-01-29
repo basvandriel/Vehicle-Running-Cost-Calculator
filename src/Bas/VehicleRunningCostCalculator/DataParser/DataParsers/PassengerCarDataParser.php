@@ -40,23 +40,22 @@
      */
     class PassengerCarDataParser extends DataParser
     {
-        
+
         /**
          * Parses the resolved data and returns the right data based on the user's input
          *
          * @param array        $resolvedData The resolved data array for the selected vehicle type
-         * @param VehicleOwner $vehicleOwner The vehicle owner belonging to the vehicle type
          *
          * @return int|float The price the user has to pay for it's vehicle type with it's specific fuel type, vehicle
          *                   weight and living province
          *
          * @throws \Exception When it can't find the data in the resolved data array
          */
-        protected function parse(array $resolvedData, VehicleOwner $vehicleOwner) {
+        public function parse(array $resolvedData) {
             /**
              * @type PassengerCar $vehicleType The passenger car vehicle type
              */
-            $province = strtolower(Province::getName($vehicleOwner->getProvince()));
+            $province = strtolower(Province::getName($this->vehicleOwner->getProvince()));
 
             if (!isset($resolvedData[$province])) {
                 throw new \Exception("Cant find province!");

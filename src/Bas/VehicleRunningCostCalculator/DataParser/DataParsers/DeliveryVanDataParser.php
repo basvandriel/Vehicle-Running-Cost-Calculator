@@ -42,21 +42,19 @@
 
         /**
          * @param array        $resolvedData The resolved data array for the selected vehicle type
-         *
-         * @param VehicleOwner $vehicleOwner The vehicle owner belonging to the vehicle type
-         *
+         **
          * @throws \Exception
          *
          * @return int
          */
-        protected function parse(array $resolvedData, VehicleOwner $vehicleOwner) {
+        public function parse(array $resolvedData) {
             /**
              * @type DeliveryVan $vehicleType
              */
-            $vehicleType = $vehicleOwner->getVehicleType();
+            $vehicleType = $this->vehicleOwner->getVehicleType();
             $weight      = $vehicleType->getWeight();
 
-            if ($vehicleOwner->isDisabled()) {
+            if ($this->vehicleOwner->isDisabled()) {
                 $data = $resolvedData['disabled'];
             } elseif ($vehicleType->isCommercial()) {
                 $data = $resolvedData['commercial'];
@@ -64,7 +62,7 @@
                 $data = $resolvedData['passenger'];
             }
 
-            if ($vehicleOwner->isDisabled() || $vehicleType->isCommercial()) {
+            if ($this->vehicleOwner->isDisabled() || $vehicleType->isCommercial()) {
                 return $data[DataPropertyResolver::resolveWeightClass($data, $weight)];
             }
             $fuelType = strtolower(FuelType::getName($vehicleType->getFuelType()));

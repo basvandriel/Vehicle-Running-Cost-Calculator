@@ -34,27 +34,26 @@
      */
     abstract class DataParser
     {
+
         /**
-         * Retrieves the data from the resolved data parser belonging to the vehicle owner's property's
-         *
-         * @param VehicleOwner $vehicleOwner The vehicle's owner.
-         *
-         * @return array|int The resolved vehicle data belonging to the user's choices such as the vehicle type, fuel
-         *                   type, where the vehicle owner is living
+         * @var VehicleOwner $vehicleOwner
          */
-        public function getData(VehicleOwner $vehicleOwner) {
-            return $this->parse($this->resolveData($vehicleOwner), $vehicleOwner);
+        protected $vehicleOwner;
+
+        /**
+         * @param \Bas\VehicleRunningCostCalculator\VehicleOwner\VehicleOwner $vehicleOwner
+         */
+        public function __construct(VehicleOwner $vehicleOwner) {
+            $this->vehicleOwner = $vehicleOwner;
         }
 
         /**
          * Resolves the right data based on the vehicle type and vehicle owner's property's
          *
-         * @param VehicleOwner $vehicleOwner The vehicle owner belonging to the vehicle type
-         *
          * @return array The resolved data array for the selected vehicle type
          */
-        private function resolveData(VehicleOwner $vehicleOwner) {
-            $vehicleType      = $vehicleOwner->getVehicleType();
+        public final function resolveData() {
+            $vehicleType      = $this->vehicleOwner->getVehicleType();
             $vehicleTypeClass = substr(get_class($vehicleType), strrpos(get_class($vehicleType), "\\") + 1);
             return require("var/road-tax-data/{$vehicleTypeClass}Data.php");
         }
@@ -63,12 +62,11 @@
          * Parses the resolved data and returns the right data belonged on the vehicle type and vehicle owner's
          * property's
          *
-         * @param array        $resolvedData The resolved data array for the selected vehicle type
-         * @param VehicleOwner $vehicleOwner The vehicle owner belonging to the vehicle type
+         * @param array $resolvedData The resolved data array for the selected vehicle type
          *
          * @throws \Exception When it can't find the data in the resolved data array
          *
          * @return array|int The right data belonged on the vehicle type and vehicle owner's property's
          */
-        protected abstract function parse(array $resolvedData, VehicleOwner $vehicleOwner);
+        public abstract function parse(array $resolvedData);
     }

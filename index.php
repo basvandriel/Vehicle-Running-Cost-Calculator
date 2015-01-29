@@ -26,17 +26,16 @@
 
     use Bas\VehicleRunningCostCalculator\DataParser\DataParserFactory;
     use Bas\VehicleRunningCostCalculator\Vehicle\FuelType;
-    use Bas\VehicleRunningCostCalculator\Vehicle\Vehicles\Bus\Bus;
-    use Bas\VehicleRunningCostCalculator\Vehicle\Vehicles\Car\Cars\CampingCar;
     use Bas\VehicleRunningCostCalculator\Vehicle\Vehicles\Van\Vans\DeliveryVan;
     use Bas\VehicleRunningCostCalculator\VehicleOwner\Province;
     use Bas\VehicleRunningCostCalculator\VehicleOwner\VehicleOwner;
 
     //$vehicle      = new CampingCar(FuelType::BENZINE, 600, true);
-    $vehicle = new DeliveryVan(FuelType::BENZINE, 800, false);
+    $vehicle      = new DeliveryVan(FuelType::BENZINE, 800, false);
     $vehicleOwner = new VehicleOwner($vehicle, Province::GELDERLAND, false);
 
-    $dataParser = DataParserFactory::resolve($vehicle);
-    $data       = $dataParser->getData($vehicleOwner);
+    $dataParser   = DataParserFactory::resolve($vehicleOwner);
+    $resolvedData = $dataParser->resolveData();
+    $data         = $dataParser->parse($resolvedData);
 
     var_dump($data);

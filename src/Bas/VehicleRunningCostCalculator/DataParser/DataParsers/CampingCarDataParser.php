@@ -46,19 +46,18 @@
          * property's
          *
          * @param array        $resolvedData The resolved data array for the selected vehicle type
-         * @param VehicleOwner $vehicleOwner The vehicle owner belonging to the vehicle type
          *
          * @throws \Exception When it can't find the data in the resolved data array
          *
          * @return array|int The right data belonged on the vehicle type and vehicle owner's property's
          */
-        protected function parse(array $resolvedData, VehicleOwner $vehicleOwner) {
+        public function parse(array $resolvedData) {
             /**
              * @type CampingCar $vehicleType
              */
-            $vehicleType = $vehicleOwner->getVehicleType();
+            $vehicleType = $this->vehicleOwner->getVehicleType();
             $data        = $resolvedData[$vehicleType->isRented()];
-            $province    = strtolower(Province::getName($vehicleOwner->getProvince()));
+            $province    = strtolower(Province::getName($this->vehicleOwner->getProvince()));
 
             if (!isset($data[$province])) {
                 throw new \Exception("Cant find province!");

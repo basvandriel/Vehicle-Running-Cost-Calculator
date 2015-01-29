@@ -24,7 +24,6 @@
     use Bas\VehicleRunningCostCalculator\DataParser\DataParser;
     use Bas\VehicleRunningCostCalculator\DataParser\DataPropertyResolver;
     use Bas\VehicleRunningCostCalculator\Vehicle\Vehicles\Bus\Bus;
-    use Bas\VehicleRunningCostCalculator\VehicleOwner\VehicleOwner;
 
 
     /**
@@ -40,32 +39,20 @@
     {
 
         /**
-         * Resolves the right data based on the vehicle type and vehicle owner's property's
-         *
-         * @param VehicleOwner $vehicleOwner The vehicle owner belonging to the vehicle type
-         *
-         * @return array The resolved data array for the selected vehicle type
-         */
-        /*        protected function resolveData(VehicleOwner $vehicleOwner) {
-                    return require "var/road-tax-data/BusData.php";
-                }*/
-
-        /**
          * Parses the resolved data and returns the right data belonged on the vehicle type and vehicle owner's
          * property's
          *
-         * @param array        $resolvedData The resolved data array for the selected vehicle type
-         * @param VehicleOwner $vehicleOwner The vehicle owner belonging to the vehicle type
+         * @param array $resolvedData The resolved data array for the selected vehicle type
          *
          * @throws \Exception When it can't find the data in the resolved data array
          *
          * @return array|int The right data belonged on the vehicle type and vehicle owner's property's
          */
-        protected function parse(array $resolvedData, VehicleOwner $vehicleOwner) {
+        public function parse(array $resolvedData) {
             /**
              * @type Bus $vehicleType
              */
-            $vehicleType = $vehicleOwner->getVehicleType();
+            $vehicleType = $this->vehicleOwner->getVehicleType();
             $weightClass = DataPropertyResolver::resolveWeightClass($resolvedData, $vehicleType->getWeight());
             return $resolvedData[$weightClass];
         }
