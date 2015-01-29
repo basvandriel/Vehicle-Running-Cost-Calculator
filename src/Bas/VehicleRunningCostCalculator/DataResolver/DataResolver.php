@@ -33,7 +33,7 @@
      * @copyright 2015 Bas van Driel
      * @license   MIT
      */
-    class DataResolverFactory
+    class DataResolver
     {
         /**
          * Resolves the right data based on the vehicle type and vehicle owner's property's
