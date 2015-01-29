@@ -19,24 +19,31 @@
      * DEALINGS IN THE SOFTWARE.
      */
 
-    spl_autoload_register(function ($class) {
-        $class = str_replace('\\', DIRECTORY_SEPARATOR, $class);
-        require __DIR__ . '\\src\\' . $class . '.php';
-    });
+    namespace Bas\VehicleRunningCostCalculator;
 
-    use Bas\VehicleRunningCostCalculator\DataParser\DataParserFactory;
-    use Bas\VehicleRunningCostCalculator\DataResolverFactory;
-    use Bas\VehicleRunningCostCalculator\Vehicle\FuelType;
-    use Bas\VehicleRunningCostCalculator\Vehicle\Vehicles\Van\Vans\DeliveryVan;
-    use Bas\VehicleRunningCostCalculator\VehicleOwner\Province;
-    use Bas\VehicleRunningCostCalculator\VehicleOwner\VehicleOwner;
+    use Bas\VehicleRunningCostCalculator\Vehicle\VehicleType;
 
-    //$vehicle      = new CampingCar(FuelType::BENZINE, 600, true);
-    $vehicle      = new DeliveryVan(FuelType::BENZINE, 551, false);
-    $vehicleOwner = new VehicleOwner($vehicle, Province::ZEELAND, false);
 
-    $dataParser   = DataParserFactory::resolve($vehicleOwner);
-    $resolvedData = DataResolverFactory::resolve($vehicle);
-    $data         = $dataParser->parse($resolvedData);
-
-    var_dump($data);
+    /**
+     *
+     *
+     * @package   Bas\VehicleRunningCostCalculator
+     *
+     * @author    Bas van Driel <basvandriel94@gmail.com>
+     * @copyright 2015 Bas van Driel
+     * @license   MIT
+     */
+    class DataResolverFactory
+    {
+        /**
+         * Resolves the right data based on the vehicle type and vehicle owner's property's
+         *
+         * @param \Bas\VehicleRunningCostCalculator\Vehicle\VehicleType $vehicleType
+         *
+         * @return array The resolved data array for the selected vehicle type
+         */
+        public static final function resolve(VehicleType $vehicleType) {
+            $vehicleTypeClass = substr(get_class($vehicleType), strrpos(get_class($vehicleType), "\\") + 1);
+            return require("var/road-tax-data/{$vehicleTypeClass}Data.php");
+        }
+    }

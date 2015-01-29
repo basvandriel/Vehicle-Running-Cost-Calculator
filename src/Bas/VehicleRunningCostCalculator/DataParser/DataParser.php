@@ -55,16 +55,6 @@
         }
 
         /**
-         * Resolves the right data based on the vehicle type and vehicle owner's property's
-         *
-         * @return array The resolved data array for the selected vehicle type
-         */
-        public final function resolveData() {
-            $vehicleTypeClass = substr(get_class($this->vehicleType), strrpos(get_class($this->vehicleType), "\\") + 1);
-            return require("var/road-tax-data/{$vehicleTypeClass}Data.php");
-        }
-
-        /**
          * Parses the resolved data and returns the right data belonged on the vehicle type and vehicle owner's
          * property's
          *
