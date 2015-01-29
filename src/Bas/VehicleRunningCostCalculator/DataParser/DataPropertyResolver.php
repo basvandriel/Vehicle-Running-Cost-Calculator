@@ -34,7 +34,8 @@
     class DataPropertyResolver
     {
         /**
-         * Resolves the "weight class" (not an actual class) based on the vehicle's weight and inputted data
+         * Resolves the "weight class" (not an actual class) based on the inputted data array (where the weight classes
+         * are) and the vehicle's weight
          *
          * @param array $data          The inputted data array where the weight classes should exist
          * @param float $vehicleWeight The vehicle type's weight
@@ -43,8 +44,9 @@
          */
         public static function resolveWeightClass(array $data, $vehicleWeight) {
             $weightClasses = array_keys($data);
-            for ($weightClassIndex = 0; $weightClassIndex < count($weightClasses) - 1; $weightClassIndex++) {
-                $weightClass = $weightClasses[$weightClassIndex];
+            $weightClassesCount = count($weightClasses) - 1;
+            for ($weightClassIndex = 0; $weightClassIndex < $weightClassesCount; $weightClassIndex++) {
+                $weightClass       = $weightClasses[$weightClassIndex];
                 $secondWeightClass = $weightClasses[$weightClassIndex + 1];
                 if ($secondWeightClass > $vehicleWeight) {
                     return $weightClass;
