@@ -19,37 +19,41 @@
      * DEALINGS IN THE SOFTWARE.
      */
 
-    namespace Bas\VehicleRunningCostCalculator\DataParser;
+    namespace Bas\VehicleRunningCostCalculator\DataParser\DataParsers;
+
+    use Bas\VehicleRunningCostCalculator\DataParser\DataParser;
+    use Bas\VehicleRunningCostCalculator\DataParser\DataPropertyResolver;
+    use Bas\VehicleRunningCostCalculator\Vehicle\Vehicles\MobileShop\MobileShop;
 
 
     /**
      *
      *
-     * @package   Bas\VehicleRunningCostCalculator\DataParser
+     * @package   Bas\RoadTaxDataWriter
      *
      * @author    Bas van Driel <basvandriel94@gmail.com>
      * @copyright 2015 Bas van Driel
      * @license   MIT
      */
-    class DataPropertyResolver
+    class MobileShopDataParser extends DataParser
     {
+
         /**
-         * Resolves the "weight class" (not an actual class) based on the vehicle's weight and inputted data
+         * Parses the resolved data and returns the right data belonged on the vehicle type and vehicle owner's
+         * property's
          *
-         * @param array $data          The inputted data array where the weight classes should exist
-         * @param float $vehicleWeight The vehicle type's weight
+         * @param array $resolvedData The resolved data array for the selected vehicle type
          *
-         * @return int The resolved weight class
+         * @throws \Exception When it can't find the data in the resolved data array
+         *
+         * @return array|int The right data belonged on the vehicle type and vehicle owner's property's
          */
-        public static function resolveWeightClass(array $data, $vehicleWeight) {
-            $weightClasses = array_keys($data);
-            for ($weightClassIndex = 0; $weightClassIndex < count($weightClasses) - 1; $weightClassIndex++) {
-                $weightClass = $weightClasses[$weightClassIndex];
-                $secondWeightClass = $weightClasses[$weightClassIndex + 1];
-                if ($secondWeightClass > $vehicleWeight) {
-                    return $weightClass;
-                }
-            }
-            return $weightClasses[$weightClassIndex];
+        public function parse(array $resolvedData) {
+            /**
+             * @type MobileShop $vehicleType
+             */
+            $vehicleType = $this->vehicleOwner->getVehicleType();
+            $weightClass = DataPropertyResolver::resolveWeightClass($resolvedData, $vehicleType->getWeight());
+            return $resolvedData[$weightClass];
         }
     }
