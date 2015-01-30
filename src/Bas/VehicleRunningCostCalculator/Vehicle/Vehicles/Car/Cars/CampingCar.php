@@ -42,8 +42,18 @@
      * @copyright 2015 Bas van Driel
      * @license   MIT
      */
-    class CampingCar extends Car
+    class CampingCar implements Car
     {
+        /**
+         * @var int $fuelType The fuel type of the car vehicle type
+         */
+        private $fuelType;
+
+        /**
+         * @var float $weight The weight of the car vehicle type
+         */
+        private $weight;
+
         /**
          * @var bool $isRented If the camping car is rented or not
          */
@@ -60,6 +70,24 @@
             $this->fuelType = $fuelType;
             $this->weight   = $weight;
             $this->isRented = $isRented;
+        }
+
+        /**
+         * A getter for retrieving the $fuelType variable in a safe way.
+         *
+         * @return int $fuelType The fuel type of the car vehicle type
+         */
+        public function getFuelType() {
+            return $this->fuelType;
+        }
+
+        /**
+         * A getter for retrieving the $weight variable in a safe way.
+         *
+         * @return float $weight The weight of the car vehicle type
+         */
+        public function getWeight() {
+            return $this->weight;
         }
 
         /**

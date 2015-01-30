@@ -28,7 +28,7 @@
 
 
     /**
-     * This class is a blue print for every "car" type, every car vehicle relies on it's fuel type and weight to
+     * This interface is a blue print for every "car" type, every car vehicle relies on it's fuel type and weight to
      * calculate the road tax prices for it
      *
      * @package   Bas\VehicleRunningCostCalculator\Vehicle
@@ -37,33 +37,7 @@
      * @copyright 2015 Bas van Driel
      * @license   MIT
      */
-    abstract class Car implements VehicleType
+    interface Car extends VehicleType
     {
-        /**
-         * @var int $fuelType The fuel type of the car vehicle type
-         */
-        protected $fuelType;
 
-        /**
-         * @var float $weight The weight of the car vehicle type
-         */
-        protected $weight;
-
-        /**
-         * A getter for retrieving the $fuelType variable in a safe way.
-         *
-         * @return int $fuelType The fuel type of the car vehicle type
-         */
-        public function getFuelType() {
-            return $this->fuelType;
-        }
-
-        /**
-         * A getter for retrieving the $weight variable in a safe way.
-         *
-         * @return float $weight The weight of the car vehicle type
-         */
-        public function getWeight() {
-            return $this->weight;
-        }
     }
