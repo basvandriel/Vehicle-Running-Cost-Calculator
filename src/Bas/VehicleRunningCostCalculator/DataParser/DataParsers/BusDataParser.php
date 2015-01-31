@@ -23,6 +23,7 @@
 
     use Bas\VehicleRunningCostCalculator\DataParser\DataParser;
     use Bas\VehicleRunningCostCalculator\DataParser\DataPropertyResolver;
+    use Bas\VehicleRunningCostCalculator\VehicleOwner\VehicleOwner;
 
 
     /**
@@ -34,19 +35,21 @@
      * @copyright 2015 Bas van Driel
      * @license   MIT
      */
-    class BusDataParser extends DataParser
+    class BusDataParser implements DataParser
     {
 
         /**
          * Parses the resolved data for the bus vehicle and returns the right data
          * belonged on this vehicle type and vehicle owner's property's
          *
-         * @param array $resolvedData The resolved data array for the selected vehicle type
+         * @param array                                                       $resolvedData The resolved data array for the selected vehicle type
+         *
+         * @param \Bas\VehicleRunningCostCalculator\VehicleOwner\VehicleOwner $vehicleOwner
          *
          * @return array|int The right data belonged on the vehicle type and vehicle owner's property's
          */
-        public function parse(array $resolvedData) {
-            $weightClass = DataPropertyResolver::resolveWeightClass($resolvedData, $this->vehicleType->getWeight());
+        public function parse(array $resolvedData, VehicleOwner $vehicleOwner) {
+            $weightClass = DataPropertyResolver::resolveWeightClass($resolvedData, $vehicleOwner->getVehicleType()->getWeight());
             return $resolvedData[$weightClass];
         }
     }

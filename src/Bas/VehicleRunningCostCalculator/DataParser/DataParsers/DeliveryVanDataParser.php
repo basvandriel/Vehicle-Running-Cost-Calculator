@@ -37,24 +37,24 @@
      * @copyright 2015 Bas van Driel
      * @license   MIT
      */
-    class DeliveryVanDataParser extends DataParser
+    class DeliveryVanDataParser implements DataParser
     {
 
         /**
          * @param array        $resolvedData The resolved data array for the selected vehicle type
-         **
-         * @throws \Exception
+         * @param VehicleOwner $vehicleOwner
          *
          * @return int
+         * @throws \Exception
          */
-        public function parse(array $resolvedData) {
+        public function parse(array $resolvedData, VehicleOwner $vehicleOwner) {
             /**
              * @type DeliveryVan $vehicleType
              */
-            $vehicleType = $this->vehicleType;
+            $vehicleType = $vehicleOwner->getVehicleType();
             $weight      = $vehicleType->getWeight();
 
-            if ($this->vehicleOwner->isDisabled()) {
+            if ($vehicleOwner->isDisabled()) {
                 $data = $resolvedData['disabled'];
             } elseif ($vehicleType->isCommercial()) {
                 $data = $resolvedData['commercial'];
@@ -62,7 +62,7 @@
                 $data = $resolvedData['passenger'];
             }
 
-            if ($this->vehicleOwner->isDisabled() || $vehicleType->isCommercial()) {
+            if ($vehicleOwner->isDisabled() || $vehicleType->isCommercial()) {
                 return $data[DataPropertyResolver::resolveWeightClass($data, $weight)];
             }
             $fuelType = strtolower(FuelType::getName($vehicleType->getFuelType()));

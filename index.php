@@ -25,7 +25,7 @@
     });
 
     use Bas\VehicleRunningCostCalculator\DataParser\DataParserFactory;
-    use Bas\VehicleRunningCostCalculator\DataResolver;
+    use Bas\VehicleRunningCostCalculator\DataResolver\DataResolver;
     use Bas\VehicleRunningCostCalculator\Vehicle\FuelType;
     use Bas\VehicleRunningCostCalculator\Vehicle\Vehicles\Van\Vans\DeliveryVan;
     use Bas\VehicleRunningCostCalculator\VehicleOwner\Province;
@@ -37,6 +37,6 @@
 
     $dataParser   = DataParserFactory::resolve($vehicleOwner);
     $resolvedData = DataResolver::resolve($vehicle);
-    $data         = $dataParser->parse($resolvedData);
+    $data         = $dataParser->parse($resolvedData, $vehicleOwner);
 
     var_dump($data);

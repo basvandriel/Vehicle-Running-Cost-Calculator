@@ -33,36 +33,19 @@
      *
      * @package Bas\VehicleRunningCostCalculator\DataParser
      */
-    abstract class DataParser
+    interface DataParser
     {
-
-        /**
-         * @var VehicleOwner $vehicleOwner The vehicle owner
-         */
-        protected $vehicleOwner;
-
-        /**
-         * @var VehicleType $vehicleType The vehicle of the vehicle owner
-         */
-        protected $vehicleType;
-
-        /**
-         * @param VehicleOwner $vehicleOwner The vehicle owner
-         */
-        public function __construct(VehicleOwner $vehicleOwner) {
-            $this->vehicleOwner = $vehicleOwner;
-            $this->vehicleType  = $vehicleOwner->getVehicleType();
-        }
-
         /**
          * Parses the resolved data and returns the right data belonged on the vehicle type and vehicle owner's
          * property's
          *
-         * @param array $resolvedData The resolved data array for the selected vehicle type
+         * @param array                                                       $resolvedData The resolved data array for
+         *                                                                                  the selected vehicle type
          *
-         * @throws \Exception When it can't find the data in the resolved data array
+         * @param \Bas\VehicleRunningCostCalculator\VehicleOwner\VehicleOwner $vehicleOwner
          *
-         * @return array|int The right data belonged on the vehicle type and vehicle owner's property's
+         * @return array|int When it can't find the data in the resolved data array
+         *
          */
-        public abstract function parse(array $resolvedData);
+        public function parse(array $resolvedData, VehicleOwner $vehicleOwner);
     }

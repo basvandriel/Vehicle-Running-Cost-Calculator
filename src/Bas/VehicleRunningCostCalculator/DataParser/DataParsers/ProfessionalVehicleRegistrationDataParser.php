@@ -23,6 +23,7 @@
 
     use Bas\VehicleRunningCostCalculator\DataParser\DataParser;
     use Bas\VehicleRunningCostCalculator\VehicleOwner\Province;
+    use Bas\VehicleRunningCostCalculator\VehicleOwner\VehicleOwner;
 
 
     /**
@@ -34,21 +35,23 @@
      * @copyright 2015 Bas van Driel
      * @license   MIT
      */
-    class ProfessionalVehicleRegistrationDataParser extends DataParser
+    class ProfessionalVehicleRegistrationDataParser implements DataParser
     {
 
         /**
          * Parses the resolved data for the professional vehicle registration vehicle and returns the right data
          * belonged on this vehicle type and vehicle owner's property's
          *
-         * @param array $resolvedData The resolved data array for the selected vehicle type
+         * @param array        $resolvedData The resolved data array for the selected vehicle type
+         *
+         * @param VehicleOwner $vehicleOwner
+         *
+         * @return array|int When it can't find the province key data in the resolved data array
          *
          * @throws \Exception When it can't find the province key data in the resolved data array
-         *
-         * @return array|int The right data belonged on the vehicle type and vehicle owner's property's
          */
-        public function parse(array $resolvedData) {
-            $province = strtolower(Province::getName($this->vehicleOwner->getProvince()));
+        public function parse(array $resolvedData, VehicleOwner $vehicleOwner) {
+            $province = strtolower(Province::getName($vehicleOwner->getProvince()));
             if (!isset($resolvedData[$province])) {
                 throw new \Exception("Cant find the province");
             }

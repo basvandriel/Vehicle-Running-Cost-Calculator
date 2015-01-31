@@ -24,6 +24,7 @@
     use Bas\VehicleRunningCostCalculator\DataParser\DataParser;
     use Bas\VehicleRunningCostCalculator\DataParser\DataPropertyResolver;
     use Bas\VehicleRunningCostCalculator\Vehicle\Vehicles\MobileShop\MobileShop;
+    use Bas\VehicleRunningCostCalculator\VehicleOwner\VehicleOwner;
 
 
     /**
@@ -35,25 +36,22 @@
      * @copyright 2015 Bas van Driel
      * @license   MIT
      */
-    class MobileShopDataParser extends DataParser
+    class MobileShopDataParser implements DataParser
     {
 
         /**
          * Parses the resolved data and returns the right data belonged on the vehicle type and vehicle owner's
          * property's
          *
-         * @param array $resolvedData The resolved data array for the selected vehicle type
+         * @param array        $resolvedData The resolved data array for the selected vehicle type
          *
-         * @throws \Exception When it can't find the data in the resolved data array
+         * @param VehicleOwner $vehicleOwner
          *
-         * @return array|int The right data belonged on the vehicle type and vehicle owner's property's
+         * @return array|int When it can't find the data in the resolved data array
+         *
          */
-        public function parse(array $resolvedData) {
-            /**
-             * @type MobileShop $vehicleType
-             */
-            $vehicleType = $this->vehicleType;
-            $weightClass = DataPropertyResolver::resolveWeightClass($resolvedData, $vehicleType->getWeight());
+        public function parse(array $resolvedData, VehicleOwner $vehicleOwner) {
+            $weightClass = DataPropertyResolver::resolveWeightClass($resolvedData, $vehicleOwner->getVehicleType()->getWeight());
             return $resolvedData[$weightClass];
         }
     }

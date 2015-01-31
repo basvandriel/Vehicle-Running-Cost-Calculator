@@ -26,6 +26,7 @@
     use Bas\VehicleRunningCostCalculator\Vehicle\FuelType;
     use Bas\VehicleRunningCostCalculator\Vehicle\Vehicles\Car\Cars\PassengerCar;
     use Bas\VehicleRunningCostCalculator\VehicleOwner\Province;
+    use Bas\VehicleRunningCostCalculator\VehicleOwner\VehicleOwner;
 
 
     /**
@@ -37,33 +38,30 @@
      * @copyright 2015 Bas van Driel
      * @license   MIT
      */
-    class PassengerCarDataParser extends DataParser
+    class PassengerCarDataParser implements DataParser
     {
 
         /**
          * Parses the resolved data for the passenger car vehicle and returns the right data
          * belonged on this vehicle type and vehicle owner's property's
          *
-         * @param array $resolvedData The resolved data array for the selected vehicle type
+         * @param array        $resolvedData The resolved data array for the selected vehicle type
          *
-         * @return int|float The price the user has to pay for it's vehicle type with it's specific fuel type, vehicle
+         * @param VehicleOwner $vehicleOwner
+         *
+         * @return float|int The price the user has to pay for it's vehicle type with it's specific fuel type, vehicle
          *                   weight and living province
-         *
          * @throws \Exception When it can't find the data in the resolved data array
          */
-        public function parse(array $resolvedData) {
-            /**
-             * @type PassengerCar $vehicleType
-             */
-            $vehicleType = $this->vehicleType;
-            $province    = strtolower(Province::getName($this->vehicleOwner->getProvince()));
+        public function parse(array $resolvedData, VehicleOwner $vehicleOwner) {
+            $province = strtolower(Province::getName($vehicleOwner->getProvince()));
 
             if (!isset($resolvedData[$province])) {
                 throw new \Exception("Cant find province!");
             }
             $data     = $resolvedData[$province];
-            $data     = $data[DataPropertyResolver::resolveWeightClass($data, $vehicleType->getWeight())];
-            $fuelType = strtolower(FuelType::getName($vehicleType->getFuelType()));
+            $data     = $data[DataPropertyResolver::resolveWeightClass($data, $vehicleOwner->getVehicleType()->getWeight())];
+            $fuelType = strtolower(FuelType::getName($vehicleOwner->getVehicleType()->getFuelType()));
 
             if (!isset($data[$fuelType])) {
                 throw new \Exception("Cant find fuel type");

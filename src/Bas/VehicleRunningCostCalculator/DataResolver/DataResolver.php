@@ -19,7 +19,7 @@
      * DEALINGS IN THE SOFTWARE.
      */
 
-    namespace Bas\VehicleRunningCostCalculator;
+    namespace Bas\VehicleRunningCostCalculator\DataResolver;
 
     use Bas\VehicleRunningCostCalculator\Vehicle\VehicleType;
 
@@ -27,7 +27,7 @@
     /**
      *
      *
-     * @package   Bas\VehicleRunningCostCalculator
+     * @package   Bas\VehicleRunningCostCalculator\DataResolver
      *
      * @author    Bas van Driel <basvandriel94@gmail.com>
      * @copyright 2015 Bas van Driel

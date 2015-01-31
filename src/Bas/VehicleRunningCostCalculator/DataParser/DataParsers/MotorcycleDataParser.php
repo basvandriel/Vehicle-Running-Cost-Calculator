@@ -35,17 +35,19 @@
      * @copyright 2015 Bas van Driel
      * @license   MIT
      */
-    class MotorcycleDataParser extends DataParser
+    class MotorcycleDataParser implements DataParser
     {
 
         /**
          * @param array        $resolvedData The resolved data array for the selected vehicle type
          *
+         * @param VehicleOwner $vehicleOwner
+         *
          * @return int
          * @throws \Exception
          */
-        public function parse(array $resolvedData) {
-            $province = strtolower(Province::getName($this->vehicleOwner->getProvince()));
+        public function parse(array $resolvedData, VehicleOwner $vehicleOwner) {
+            $province = strtolower(Province::getName($vehicleOwner->getProvince()));
             if (!isset($resolvedData[$province])) {
                 throw new \Exception("Can't find the province key");
             }

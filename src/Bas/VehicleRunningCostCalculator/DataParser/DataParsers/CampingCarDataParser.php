@@ -38,26 +38,26 @@
      * @copyright 2015 Bas van Driel
      * @license   MIT
      */
-    class CampingCarDataParser extends DataParser
+    class CampingCarDataParser implements DataParser
     {
 
         /**
          * Parses the resolved data and returns the right data belonged on the vehicle type and vehicle owner's
          * property's
          *
-         * @param array        $resolvedData The resolved data array for the selected vehicle type
+         * @param array                                                       $resolvedData The resolved data array for
+         *                                                                                  the selected vehicle type
+         *
+         * @param \Bas\VehicleRunningCostCalculator\VehicleOwner\VehicleOwner $vehicleOwner
+         *
+         * @return array|int When it can't find the data in the resolved data array
          *
          * @throws \Exception When it can't find the data in the resolved data array
-         *
-         * @return array|int The right data belonged on the vehicle type and vehicle owner's property's
          */
-        public function parse(array $resolvedData) {
-            /**
-             * @type CampingCar $vehicleType
-             */
-            $vehicleType = $this->vehicleType;
+        public function parse(array $resolvedData, VehicleOwner $vehicleOwner) {
+            $vehicleType = $vehicleOwner->getVehicleType();
             $data        = $resolvedData[$vehicleType->isRented()];
-            $province    = strtolower(Province::getName($this->vehicleOwner->getProvince()));
+            $province    = strtolower(Province::getName($vehicleType->getProvince()));
 
             if (!isset($data[$province])) {
                 throw new \Exception("Cant find province!");
