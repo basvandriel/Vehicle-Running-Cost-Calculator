@@ -49,15 +49,14 @@
          *
          * @param VehicleOwner $vehicleOwner The vehicle owner
          *
-         * @return DataParser The resolved data parser belonging to the vehicle owner's vehicle
-         *
          * @throws \Exception When it can't find the data parser class
+         *
+         * @return DataParser The resolved data parser belonging to the vehicle owner's vehicle
          */
         public static function resolve(VehicleOwner $vehicleOwner) {
-            $vehicleType           = $vehicleOwner->getVehicleType();
-            $vehicleTypeClass      = substr(get_class($vehicleType), strrpos(get_class($vehicleType), "\\") + 1);
-            $vehicleTypeDataParser = "Bas\\VehicleRunningCostCalculator\\DataParser\\DataParsers\\{$vehicleTypeClass}DataParser";
-            if (!class_exists($vehicleTypeDataParser)) {
+            $reflectedVehicleType  = new \ReflectionClass($vehicleOwner->getVehicleType());
+            $vehicleTypeDataParser = "Bas\\VehicleRunningCostCalculator\\DataParser\\DataParsers\\{$reflectedVehicleType->getShortName()}DataParser";
+            if (!(new \ReflectionClass($vehicleTypeDataParser))->isSubclassOf("Bas\\VehicleRunningCostCalculator\\DataParser\\DataParser")) {
                 throw new \Exception("Couldn't find the data parser class for the vehicle type");
             }
             return new $vehicleTypeDataParser($vehicleOwner);
