@@ -55,9 +55,8 @@
          */
         public static function resolve(VehicleOwner $vehicleOwner) {
             $vehicleType           = $vehicleOwner->getVehicleType();
-            $namespace             = substr(get_class(new self), 0, strrpos(get_class(new self), "\\"));
             $vehicleTypeClass      = substr(get_class($vehicleType), strrpos(get_class($vehicleType), "\\") + 1);
-            $vehicleTypeDataParser = "{$namespace}\\DataParsers\\{$vehicleTypeClass}DataParser";
+            $vehicleTypeDataParser = "Bas\\VehicleRunningCostCalculator\\DataParser\\DataParsers\\{$vehicleTypeClass}DataParser";
             if (!class_exists($vehicleTypeDataParser)) {
                 throw new \Exception("Couldn't find the data parser class for the vehicle type");
             }
