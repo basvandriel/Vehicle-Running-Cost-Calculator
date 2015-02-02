@@ -46,7 +46,9 @@
          */
         protected $vehicleType;
 
-
+        /**
+         * @param VehicleOwner $vehicleOwner
+         */
         public function __construct(VehicleOwner $vehicleOwner) {
             $this->vehicleOwner = $vehicleOwner;
             $this->vehicleType  = $vehicleOwner->getVehicleType();

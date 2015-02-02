@@ -55,8 +55,8 @@
          */
         public static function resolve(VehicleOwner $vehicleOwner) {
             $reflectedVehicleType  = new \ReflectionClass($vehicleOwner->getVehicleType());
-            $vehicleTypeDataParser = "Bas\\VehicleRunningCostCalculator\\DataParser\\DataParsers\\{$reflectedVehicleType->getShortName()}DataParser";
-            if (!(new \ReflectionClass($vehicleTypeDataParser))->isSubclassOf("Bas\\VehicleRunningCostCalculator\\DataParser\\DataParser")) {
+            $vehicleTypeDataParser = __NAMESPACE__ . "\\DataParsers\\{$reflectedVehicleType->getShortName()}DataParser";
+            if (!(new \ReflectionClass($vehicleTypeDataParser))->isSubclassOf(__NAMESPACE__ . "\\DataParser")) {
                 throw new \Exception("Couldn't find the data parser class for the vehicle type");
             }
             return new $vehicleTypeDataParser($vehicleOwner);
