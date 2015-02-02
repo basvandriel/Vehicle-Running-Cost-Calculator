@@ -61,6 +61,6 @@
             if (!class_exists($vehicleTypeDataParser)) {
                 throw new \Exception("Couldn't find the data parser class for the vehicle type");
             }
-            return new $vehicleTypeDataParser;
+            return new $vehicleTypeDataParser($vehicleOwner);
         }
     }

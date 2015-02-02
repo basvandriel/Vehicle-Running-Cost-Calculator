@@ -19,40 +19,24 @@
      * DEALINGS IN THE SOFTWARE.
      */
 
-    namespace Bas\VehicleRunningCostCalculator\DataParser\DataParsers;
-
-    use Bas\VehicleRunningCostCalculator\DataParser\DataParser;
-    use Bas\VehicleRunningCostCalculator\VehicleOwner\Province;
-    use Bas\VehicleRunningCostCalculator\VehicleOwner\VehicleOwner;
+    namespace Bas\VehicleRunningCostCalculator\Vehicle\Vehicles;
 
 
     /**
-     * Defines a data parser for the motorcycle vehicle type
      *
-     * @package   Bas\VehicleRunningCostCalculator\DataParser\DataParsers
+     *
+     * @package   Bas\VehicleRunningCostCalculator\Vehicle\Vehicles
      *
      * @author    Bas van Driel <basvandriel94@gmail.com>
      * @copyright 2015 Bas van Driel
      * @license   MIT
      */
-    class MotorcycleDataParser extends DataParser
+    interface RentableVehicle
     {
-
         /**
-         * Parses the resolved data and returns the right data belonged on the vehicle type and vehicle owner's
-         * property's
+         * A check if the vehicle type is rented
          *
-         * @param array $resolvedData The resolved data array for the selected vehicle type
-         *
-         * @throws \Exception When it can't find the data in the resolved data array
-         *
-         * @return array|int The data belonging to the vehicle owner's property's
+         * @return bool $isRented If the vehicle type is rented or not
          */
-        public function parse(array $resolvedData) {
-            $province = strtolower(Province::getName($this->vehicleOwner->getProvince()));
-            if (!isset($resolvedData[$province])) {
-                throw new \Exception("Can't find the province key");
-            }
-            return $resolvedData[$province];
-        }
+        public function isRented();
     }

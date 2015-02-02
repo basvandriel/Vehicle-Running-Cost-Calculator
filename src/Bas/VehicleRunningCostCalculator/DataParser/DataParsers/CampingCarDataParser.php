@@ -24,13 +24,11 @@
     use Bas\VehicleRunningCostCalculator\DataParser\DataParser;
     use Bas\VehicleRunningCostCalculator\DataParser\DataPropertyResolver;
     use Bas\VehicleRunningCostCalculator\Vehicle\FuelType;
-    use Bas\VehicleRunningCostCalculator\Vehicle\Vehicles\Car\Cars\CampingCar;
     use Bas\VehicleRunningCostCalculator\VehicleOwner\Province;
-    use Bas\VehicleRunningCostCalculator\VehicleOwner\VehicleOwner;
 
 
     /**
-     *
+     * Provides a data parser for the camping car vehicle
      *
      * @package   Bas\RoadTaxDataWriter
      *
@@ -38,25 +36,21 @@
      * @copyright 2015 Bas van Driel
      * @license   MIT
      */
-    class CampingCarDataParser implements DataParser
+    class CampingCarDataParser extends DataParser
     {
 
         /**
          * Parses the resolved data and returns the right data belonged on the vehicle type and vehicle owner's
          * property's
          *
-         * @param array                                                       $resolvedData The resolved data array for
-         *                                                                                  the selected vehicle type
-         *
-         * @param \Bas\VehicleRunningCostCalculator\VehicleOwner\VehicleOwner $vehicleOwner
-         *
-         * @return array|int When it can't find the data in the resolved data array
+         * @param array $resolvedData The resolved data array for the selected vehicle type
          *
          * @throws \Exception When it can't find the data in the resolved data array
+         *
+         * @return array|int The data belonging to the vehicle owner's property's
          */
-        public function parse(array $resolvedData, VehicleOwner $vehicleOwner) {
-            $vehicleType = $vehicleOwner->getVehicleType();
-            $data        = $resolvedData[$vehicleType->isRented()];
+        public function parse(array $resolvedData) {
+            $data        = $resolvedData[$this->$vehicleType->isRented()];
             $province    = strtolower(Province::getName($vehicleType->getProvince()));
 
             if (!isset($data[$province])) {

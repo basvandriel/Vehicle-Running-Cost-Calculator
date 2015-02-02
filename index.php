@@ -37,6 +37,6 @@
 
     $dataParser   = DataParserFactory::resolve($vehicleOwner);
     $resolvedData = DataResolver::resolve($vehicle);
-    $data         = $dataParser->parse($resolvedData, $vehicleOwner);
+    $data         = $dataParser->parse($resolvedData);
 
     var_dump($data);

@@ -24,8 +24,6 @@
     use Bas\VehicleRunningCostCalculator\DataParser\DataParser;
     use Bas\VehicleRunningCostCalculator\DataParser\DataPropertyResolver;
     use Bas\VehicleRunningCostCalculator\Vehicle\FuelType;
-    use Bas\VehicleRunningCostCalculator\Vehicle\Vehicles\Van\Vans\DeliveryVan;
-    use Bas\VehicleRunningCostCalculator\VehicleOwner\VehicleOwner;
 
 
     /**
@@ -37,35 +35,33 @@
      * @copyright 2015 Bas van Driel
      * @license   MIT
      */
-    class DeliveryVanDataParser implements DataParser
+    class DeliveryVanDataParser extends DataParser
     {
-
         /**
-         * @param array        $resolvedData The resolved data array for the selected vehicle type
-         * @param VehicleOwner $vehicleOwner
+         * Parses the resolved data and returns the right data belonged on the vehicle type and vehicle owner's
+         * property's
          *
-         * @return int
-         * @throws \Exception
+         * @param array $resolvedData The resolved data array for the selected vehicle type
+         *
+         * @throws \Exception When it can't find the data in the resolved data array
+         *
+         * @return array|int The data belonging to the vehicle owner's property's
          */
-        public function parse(array $resolvedData, VehicleOwner $vehicleOwner) {
-            /**
-             * @type DeliveryVan $vehicleType
-             */
-            $vehicleType = $vehicleOwner->getVehicleType();
-            $weight      = $vehicleType->getWeight();
+        public function parse(array $resolvedData) {
+            $weight = $this->vehicleType->getWeight();
 
-            if ($vehicleOwner->isDisabled()) {
+            if ($this->vehicleOwner->isDisabled()) {
                 $data = $resolvedData['disabled'];
-            } elseif ($vehicleType->isCommercial()) {
+            } elseif ($this->vehicleType->isCommercial()) {
                 $data = $resolvedData['commercial'];
             } else {
                 $data = $resolvedData['passenger'];
             }
 
-            if ($vehicleOwner->isDisabled() || $vehicleType->isCommercial()) {
+            if ($this->vehicleOwner->isDisabled() || $this->vehicleType->isCommercial()) {
                 return $data[DataPropertyResolver::resolveWeightClass($data, $weight)];
             }
-            $fuelType = strtolower(FuelType::getName($vehicleType->getFuelType()));
+            $fuelType = strtolower(FuelType::getName($this->vehicleType->getFuelType()));
             $data     = $data[DataPropertyResolver::resolveWeightClass($data, $weight)];
             if (!isset($data[$fuelType])) {
                 throw new \Exception("Cant find the fuel type");

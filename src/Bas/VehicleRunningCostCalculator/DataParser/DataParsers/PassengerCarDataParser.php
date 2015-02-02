@@ -38,30 +38,28 @@
      * @copyright 2015 Bas van Driel
      * @license   MIT
      */
-    class PassengerCarDataParser implements DataParser
+    class PassengerCarDataParser extends DataParser
     {
 
         /**
-         * Parses the resolved data for the passenger car vehicle and returns the right data
-         * belonged on this vehicle type and vehicle owner's property's
+         * Parses the resolved data and returns the right data belonged on the vehicle type and vehicle owner's
+         * property's
          *
-         * @param array        $resolvedData The resolved data array for the selected vehicle type
+         * @param array $resolvedData The resolved data array for the selected vehicle type
          *
-         * @param VehicleOwner $vehicleOwner
-         *
-         * @return float|int The price the user has to pay for it's vehicle type with it's specific fuel type, vehicle
-         *                   weight and living province
          * @throws \Exception When it can't find the data in the resolved data array
+         *
+         * @return array|int The data belonging to the vehicle owner's property's
          */
-        public function parse(array $resolvedData, VehicleOwner $vehicleOwner) {
-            $province = strtolower(Province::getName($vehicleOwner->getProvince()));
+        public function parse(array $resolvedData) {
+            $province = strtolower(Province::getName($this->vehicleOwner->getProvince()));
 
             if (!isset($resolvedData[$province])) {
                 throw new \Exception("Cant find province!");
             }
             $data     = $resolvedData[$province];
-            $data     = $data[DataPropertyResolver::resolveWeightClass($data, $vehicleOwner->getVehicleType()->getWeight())];
-            $fuelType = strtolower(FuelType::getName($vehicleOwner->getVehicleType()->getFuelType()));
+            $data     = $data[DataPropertyResolver::resolveWeightClass($data, $this->vehicleType->getWeight())];
+            $fuelType = strtolower(FuelType::getName($this->vehicleType->getFuelType()));
 
             if (!isset($data[$fuelType])) {
                 throw new \Exception("Cant find fuel type");

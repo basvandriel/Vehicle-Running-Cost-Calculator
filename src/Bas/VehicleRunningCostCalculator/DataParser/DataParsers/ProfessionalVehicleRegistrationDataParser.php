@@ -35,23 +35,21 @@
      * @copyright 2015 Bas van Driel
      * @license   MIT
      */
-    class ProfessionalVehicleRegistrationDataParser implements DataParser
+    class ProfessionalVehicleRegistrationDataParser extends DataParser
     {
 
         /**
-         * Parses the resolved data for the professional vehicle registration vehicle and returns the right data
-         * belonged on this vehicle type and vehicle owner's property's
+         * Parses the resolved data and returns the right data belonged on the vehicle type and vehicle owner's
+         * property's
          *
-         * @param array        $resolvedData The resolved data array for the selected vehicle type
+         * @param array $resolvedData The resolved data array for the selected vehicle type
          *
-         * @param VehicleOwner $vehicleOwner
+         * @throws \Exception When it can't find the data in the resolved data array
          *
-         * @return array|int When it can't find the province key data in the resolved data array
-         *
-         * @throws \Exception When it can't find the province key data in the resolved data array
+         * @return array|int The data belonging to the vehicle owner's property's
          */
-        public function parse(array $resolvedData, VehicleOwner $vehicleOwner) {
-            $province = strtolower(Province::getName($vehicleOwner->getProvince()));
+        public function parse(array $resolvedData) {
+            $province = strtolower(Province::getName($this->vehicleOwner->getProvince()));
             if (!isset($resolvedData[$province])) {
                 throw new \Exception("Cant find the province");
             }
