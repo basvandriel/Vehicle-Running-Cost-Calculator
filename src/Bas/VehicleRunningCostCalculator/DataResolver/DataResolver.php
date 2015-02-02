@@ -25,7 +25,7 @@
 
 
     /**
-     *
+     * Resolves the data of the selected vehicle type
      *
      * @package   Bas\VehicleRunningCostCalculator\DataResolver
      *
@@ -36,9 +36,9 @@
     class DataResolver
     {
         /**
-         * Resolves the right data based on the vehicle type and vehicle owner's property's
+         * Resolves the data of the selected vehicle type
          *
-         * @param \Bas\VehicleRunningCostCalculator\Vehicle\VehicleType $vehicleType
+         * @param VehicleType $vehicleType The selected vehicle type
          *
          * @return array The resolved data array for the selected vehicle type
          */
