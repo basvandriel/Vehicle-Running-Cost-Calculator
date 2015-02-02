@@ -58,7 +58,7 @@
             $namespace             = substr(get_class(new self), 0, strrpos(get_class(new self), "\\"));
             $vehicleTypeClass      = substr(get_class($vehicleType), strrpos(get_class($vehicleType), "\\") + 1);
             $vehicleTypeDataParser = "{$namespace}\\DataParsers\\{$vehicleTypeClass}DataParser";
-            if (!class_exists($vehicleTypeDataParser)) {
+            if (!class_exists($vehicleTypeDataParser) || !is_a($vehicleTypeDataParser, "Bas\\VehicleRunningCostCalculator\\DataParser\\DataParser")) {
                 throw new \Exception("Couldn't find the data parser class for the vehicle type");
             }
             return new $vehicleTypeDataParser($vehicleOwner);
