@@ -25,7 +25,6 @@
      * Use the "VehicleType" class for polymorphism
      */
     use Bas\VehicleRunningCostCalculator\Vehicle\Vehicles\CombustionVehicleType;
-    use Bas\VehicleRunningCostCalculator\Vehicle\VehicleType;
 
 
     /**

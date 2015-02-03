@@ -25,7 +25,6 @@
     use Bas\VehicleRunningCostCalculator\DataParser\DataPropertyResolver;
     use Bas\VehicleRunningCostCalculator\Vehicle\FuelType;
     use Bas\VehicleRunningCostCalculator\Vehicle\Vehicles\Car\Cars\CampingCar;
-    use Bas\VehicleRunningCostCalculator\Vehicle\Vehicles\RentableVehicleType;
     use Bas\VehicleRunningCostCalculator\VehicleOwner\Province;
 
 
