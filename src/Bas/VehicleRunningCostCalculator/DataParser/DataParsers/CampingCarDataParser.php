@@ -24,11 +24,15 @@
     use Bas\VehicleRunningCostCalculator\DataParser\DataParser;
     use Bas\VehicleRunningCostCalculator\DataParser\DataPropertyResolver;
     use Bas\VehicleRunningCostCalculator\Vehicle\FuelType;
+    use Bas\VehicleRunningCostCalculator\Vehicle\Vehicles\Car\Cars\CampingCar;
+    use Bas\VehicleRunningCostCalculator\Vehicle\Vehicles\RentableVehicleType;
     use Bas\VehicleRunningCostCalculator\VehicleOwner\Province;
 
 
     /**
      * Provides a data parser for the camping car vehicle
+     *
+     * @property CampingCar $vehicleType
      *
      * @package   Bas\RoadTaxDataWriter
      *
@@ -50,16 +54,16 @@
          * @return array|int The data belonging to the vehicle owner's property's
          */
         public function parse(array $resolvedData) {
-            $data        = $resolvedData[$this->$vehicleType->isRented()];
-            $province    = strtolower(Province::getName($vehicleType->getProvince()));
+            $data     = $resolvedData[$this->vehicleType->isRented()];
+            $province = strtolower(Province::getName($this->vehicleOwner->getProvince()));
 
             if (!isset($data[$province])) {
                 throw new \Exception("Cant find province!");
             }
             $data = $data[$province];
-            $data = $data[DataPropertyResolver::resolveWeightClass($data, $vehicleType->getWeight())];
+            $data = $data[DataPropertyResolver::resolveWeightClass($data, $this->vehicleType->getWeight())];
 
-            $fuelType = strtolower(FuelType::getName($vehicleType->getFuelType()));
+            $fuelType = strtolower(FuelType::getName($this->vehicleType->getFuelType()));
             if (!isset($data[$fuelType])) {
                 throw new \Exception("Can't find fuel type");
             }

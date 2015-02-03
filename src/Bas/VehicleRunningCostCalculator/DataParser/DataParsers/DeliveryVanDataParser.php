@@ -24,10 +24,11 @@
     use Bas\VehicleRunningCostCalculator\DataParser\DataParser;
     use Bas\VehicleRunningCostCalculator\DataParser\DataPropertyResolver;
     use Bas\VehicleRunningCostCalculator\Vehicle\FuelType;
+    use Bas\VehicleRunningCostCalculator\Vehicle\Vehicles\Van\Vans\DeliveryVan;
 
 
     /**
-     *
+     * @property DeliveryVan $vehicleType
      *
      * @package   Bas\VehicleRunningCostCalculator\DataParser\DataParsers
      *

@@ -26,11 +26,12 @@
     use Bas\VehicleRunningCostCalculator\Vehicle\FuelType;
     use Bas\VehicleRunningCostCalculator\Vehicle\Vehicles\Car\Cars\PassengerCar;
     use Bas\VehicleRunningCostCalculator\VehicleOwner\Province;
-    use Bas\VehicleRunningCostCalculator\VehicleOwner\VehicleOwner;
 
 
     /**
      * Defines a data parser for the passenger car
+     *
+     * @property PassengerCar $vehicleType
      *
      * @package   Bas\VehicleRunningCostCalculator\DataParserFactory\DataParsers
      *
