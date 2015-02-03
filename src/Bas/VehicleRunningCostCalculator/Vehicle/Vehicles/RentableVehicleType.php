@@ -19,26 +19,26 @@
      * DEALINGS IN THE SOFTWARE.
      */
 
-    namespace Bas\VehicleRunningCostCalculator\Vehicle\Vehicles\Car;
+    namespace Bas\VehicleRunningCostCalculator\Vehicle\Vehicles;
 
-    /**
-     * Use the "VehicleType" class for polymorphism
-     */
-    use Bas\VehicleRunningCostCalculator\Vehicle\Vehicles\CombustionVehicleType;
     use Bas\VehicleRunningCostCalculator\Vehicle\VehicleType;
 
 
     /**
-     * This interface is a blue print for every "car" type, every car vehicle relies on it's fuel type and weight to
-     * calculate the road tax prices for it
+     * Defines an interface for all vehicle types who can be rented
      *
-     * @package   Bas\VehicleRunningCostCalculator\Vehicle
+     * @package   Bas\VehicleRunningCostCalculator\Vehicle\Vehicles
      *
      * @author    Bas van Driel <basvandriel94@gmail.com>
      * @copyright 2015 Bas van Driel
      * @license   MIT
      */
-    interface Car extends CombustionVehicleType
+    interface RentableVehicleType extends VehicleType
     {
-
+        /**
+         * A check if the vehicle type is rented
+         *
+         * @return bool $isRented If the vehicle type is rented or not
+         */
+        public function isRented();
     }

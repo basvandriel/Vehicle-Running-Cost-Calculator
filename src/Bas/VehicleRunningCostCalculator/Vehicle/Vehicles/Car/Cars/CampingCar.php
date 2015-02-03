@@ -25,7 +25,7 @@
      * Use the "Car" class for polymorphism
      */
     use Bas\VehicleRunningCostCalculator\Vehicle\Vehicles\Car\Car;
-    use Bas\VehicleRunningCostCalculator\Vehicle\Vehicles\RentableVehicle;
+    use Bas\VehicleRunningCostCalculator\Vehicle\Vehicles\RentableVehicleType;
 
 
     /**
@@ -43,7 +43,7 @@
      * @copyright 2015 Bas van Driel
      * @license   MIT
      */
-    class CampingCar implements Car, RentableVehicle
+    class CampingCar implements Car, RentableVehicleType
     {
         /**
          * @var int $fuelType The fuel type of the car vehicle type

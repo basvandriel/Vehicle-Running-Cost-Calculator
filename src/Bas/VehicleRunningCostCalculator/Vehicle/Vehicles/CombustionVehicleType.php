@@ -19,26 +19,21 @@
      * DEALINGS IN THE SOFTWARE.
      */
 
-    namespace Bas\VehicleRunningCostCalculator\Vehicle\Vehicles\Car;
+    namespace Bas\VehicleRunningCostCalculator\Vehicle\Vehicles;
 
-    /**
-     * Use the "VehicleType" class for polymorphism
-     */
-    use Bas\VehicleRunningCostCalculator\Vehicle\Vehicles\CombustionVehicleType;
     use Bas\VehicleRunningCostCalculator\Vehicle\VehicleType;
 
-
     /**
-     * This interface is a blue print for every "car" type, every car vehicle relies on it's fuel type and weight to
-     * calculate the road tax prices for it
+     * Defines an interface for all vehicle types who rely on a fuel type
      *
-     * @package   Bas\VehicleRunningCostCalculator\Vehicle
-     *
-     * @author    Bas van Driel <basvandriel94@gmail.com>
-     * @copyright 2015 Bas van Driel
-     * @license   MIT
+     * @package Bas\VehicleRunningCostCalculator\Vehicle\Vehicles
      */
-    interface Car extends CombustionVehicleType
+    interface CombustionVehicleType extends VehicleType
     {
-
+        /**
+         * A getter for retrieving the vehicle's fuel type
+         *
+         * @return int $fuelType The fuel type of the vehicle type
+         */
+        public function getFuelType();
     }

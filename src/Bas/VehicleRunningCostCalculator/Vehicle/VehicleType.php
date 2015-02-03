@@ -23,8 +23,6 @@
     /**
      * Defines the interface for every vehicle type.
      *
-     * Implement this if you're adding a new vehicle type
-     *
      * @package   Bas\VehicleRunningCostCalculator\Vehicle
      *
      * @author    Bas van Driel <basvandriel94@gmail.com>
@@ -33,5 +31,10 @@
      */
     interface VehicleType
     {
-
+        /**
+         * A getter for retrieving the weight of the vehicle type
+         *
+         * @return float $weight The weight of the vehicle type
+         */
+        public function getWeight();
     }

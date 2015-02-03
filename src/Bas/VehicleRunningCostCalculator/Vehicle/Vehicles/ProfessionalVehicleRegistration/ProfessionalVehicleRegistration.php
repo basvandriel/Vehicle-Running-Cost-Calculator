@@ -21,6 +21,8 @@
 
     namespace Bas\VehicleRunningCostCalculator\Vehicle\Vehicles\ProfessionalVehicleRegistration;
 
+    use Bas\VehicleRunningCostCalculator\Vehicle\VehicleType;
+
 
     /**
      * Defines a professional vehicle registration vehicle type, this vehicle type relies on the following data to
@@ -34,7 +36,15 @@
      * @copyright 2015 Bas van Driel
      * @license   MIT
      */
-    class ProfessionalVehicleRegistration
+    class ProfessionalVehicleRegistration implements VehicleType
     {
 
+        /**
+         * A getter for retrieving the weight of the vehicle type
+         *
+         * @return float $weight The weight of the vehicle type
+         */
+        public function getWeight() {
+            return null;
+        }
     }

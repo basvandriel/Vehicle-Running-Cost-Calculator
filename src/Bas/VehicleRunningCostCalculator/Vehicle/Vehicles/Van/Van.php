@@ -24,6 +24,7 @@
     /**
      * Use the "VehicleType" class for polymorphism
      */
+    use Bas\VehicleRunningCostCalculator\Vehicle\Vehicles\CombustionVehicleType;
     use Bas\VehicleRunningCostCalculator\Vehicle\VehicleType;
 
 
@@ -36,7 +37,7 @@
      * @copyright 2015 Bas van Driel
      * @license   MIT
      */
-    abstract class Van implements VehicleType
+    interface Van extends CombustionVehicleType
     {
 
     }

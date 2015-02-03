@@ -24,6 +24,7 @@
     /**
      * Use the "Van" class for polymorphism
      */
+    use Bas\VehicleRunningCostCalculator\Vehicle\Vehicles\CommercialVehicleType;
     use Bas\VehicleRunningCostCalculator\Vehicle\Vehicles\Van\Van;
 
 
@@ -46,7 +47,7 @@
      * @copyright 2015 Bas van Driel
      * @license   MIT
      */
-    class DeliveryVan extends Van
+    class DeliveryVan implements Van, CommercialVehicleType
     {
         /**
          * @var int $weight The fuel type of the camping car
@@ -95,9 +96,9 @@
         }
 
         /**
-         * A getter for retrieving the $isCommercial variable in a safe way.
+         * A check for if the delivery van is commercial
          *
-         * @return float $weight The weight of the passenger car.
+         * @return bool If the delivery van is commercial
          */
         public function isCommercial() {
             return $this->isCommercial;

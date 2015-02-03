@@ -21,22 +21,17 @@
 
     namespace Bas\VehicleRunningCostCalculator\Vehicle\Vehicles;
 
-
     /**
+     * Defines an interface for all vehicle types who can be used commercially
      *
-     *
-     * @package   Bas\VehicleRunningCostCalculator\Vehicle\Vehicles
-     *
-     * @author    Bas van Driel <basvandriel94@gmail.com>
-     * @copyright 2015 Bas van Driel
-     * @license   MIT
+     * @package Bas\VehicleRunningCostCalculator\Vehicle\Vehicles
      */
-    interface RentableVehicle
+    interface CommercialVehicleType
     {
         /**
-         * A check if the vehicle type is rented
+         * A check for if the vehicle type is commercial
          *
-         * @return bool $isRented If the vehicle type is rented or not
+         * @return bool If the vehicle type is commercial
          */
-        public function isRented();
+        public function isCommercial();
     }
