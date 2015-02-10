@@ -53,7 +53,7 @@
          *
          * @return DataParser The resolved data parser belonging to the vehicle owner's vehicle
          */
-        public static function resolve(VehicleOwner $vehicleOwner) {
+        public static function build(VehicleOwner $vehicleOwner) {
             $reflectedVehicleType  = new \ReflectionClass($vehicleOwner->getVehicleType());
             $vehicleTypeDataParser = __NAMESPACE__ . "\\DataParsers\\{$reflectedVehicleType->getShortName()}DataParser";
             if (!(new \ReflectionClass($vehicleTypeDataParser))->isSubclassOf(__NAMESPACE__ . "\\DataParser")) {

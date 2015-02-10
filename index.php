@@ -36,7 +36,7 @@
     $vehicle      = new \Bas\VehicleRunningCostCalculator\Vehicle\Vehicles\Car\Cars\PassengerCar(FuelType::BENZINE, 551, false);
     $vehicleOwner = new VehicleOwner($vehicle, Province::ZEELAND, false);
 
-    $dataParser   = DataParserFactory::resolve($vehicleOwner);
+    $dataParser   = DataParserFactory::build($vehicleOwner);
     $resolvedData = DataResolver::resolve($vehicle);
     $data         = $dataParser->parse($resolvedData);
 
