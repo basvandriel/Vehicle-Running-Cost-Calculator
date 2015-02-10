@@ -37,7 +37,7 @@
     $vehicleOwner = new VehicleOwner($vehicle, Province::ZEELAND, false);
 
     $dataParser   = DataParserFactory::build($vehicleOwner);
-    $resolvedData = DataResolver::resolve($vehicle);
+    $resolvedData = DataResolver::resolveData($vehicle);
     $data         = $dataParser->parse($resolvedData);
 
     var_dump($data);

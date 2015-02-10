@@ -42,7 +42,7 @@
          *
          * @return array The resolved data array for the selected vehicle type
          */
-        public static final function resolve(VehicleType $vehicleType) {
+        public static final function resolveData(VehicleType $vehicleType) {
             $vehicleTypeClass = (new \ReflectionClass($vehicleType))->getShortName();
             return require("var/road-tax-data/{$vehicleTypeClass}Data.php");
         }
