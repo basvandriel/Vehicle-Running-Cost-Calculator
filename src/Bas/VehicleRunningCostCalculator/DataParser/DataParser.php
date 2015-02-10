@@ -44,21 +44,21 @@
         /**
          * @param VehicleOwner $vehicleOwner The owner of the vehicle type
          */
-        public function __construct(VehicleOwner $vehicleOwner) {
+        public final function __construct(VehicleOwner $vehicleOwner) {
             $this->vehicleOwner = $vehicleOwner;
         }
 
         /**
          * @return VehicleOwner The owner of the vehicle type
          */
-        protected function getVehicleOwner() {
+        protected final function getVehicleOwner() {
             return $this->vehicleOwner;
         }
 
         /**
          * @return VehicleType The vehicle type of the owner
          */
-        protected function getVehicleType() {
+        protected final function getVehicleType() {
             return $this->vehicleOwner->getVehicleType();
         }
 
