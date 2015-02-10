@@ -47,7 +47,7 @@
          * @return array|int The right data belonged on the vehicle type and vehicle owner's property's
          */
         public function parse(array $resolvedData) {
-            $weightClass = DataPropertyResolver::resolveWeightClass($resolvedData, $this->vehicleType->getWeight());
+            $weightClass = DataPropertyResolver::resolveWeightClass($resolvedData, $this->getVehicleType()->getWeight());
             return $resolvedData[$weightClass];
         }
     }

@@ -48,7 +48,7 @@
          * @return array|int The data belonging to the vehicle owner's property's
          */
         public function parse(array $resolvedData) {
-            $province = strtolower(Province::getName($this->vehicleOwner->getProvince()));
+            $province = strtolower(Province::getName($this->getVehicleOwner()->getProvince()));
             if (!isset($resolvedData[$province])) {
                 throw new \Exception("Cant find the province");
             }

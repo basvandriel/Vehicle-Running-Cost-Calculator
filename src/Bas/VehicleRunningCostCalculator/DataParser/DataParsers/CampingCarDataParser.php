@@ -31,7 +31,7 @@
     /**
      * Provides a data parser for the camping car vehicle
      *
-     * @property CampingCar $vehicleType
+     * @method CampingCar getVehicleType
      *
      * @package   Bas\RoadTaxDataWriter
      *
@@ -53,16 +53,16 @@
          * @return array|int The data belonging to the vehicle owner's property's
          */
         public function parse(array $resolvedData) {
-            $data     = $resolvedData[$this->vehicleType->isRented()];
-            $province = strtolower(Province::getName($this->vehicleOwner->getProvince()));
+            $data     = $resolvedData[$this->getVehicleType()->isRented()];
+            $province = strtolower(Province::getName($this->getVehicleOwner()->getProvince()));
 
             if (!isset($data[$province])) {
                 throw new \Exception("Cant find province!");
             }
             $data = $data[$province];
-            $data = $data[DataPropertyResolver::resolveWeightClass($data, $this->vehicleType->getWeight())];
+            $data = $data[DataPropertyResolver::resolveWeightClass($data, $this->getVehicleType()->getWeight())];
 
-            $fuelType = strtolower(FuelType::getName($this->vehicleType->getFuelType()));
+            $fuelType = strtolower(FuelType::getName($this->getVehicleType()->getFuelType()));
             if (!isset($data[$fuelType])) {
                 throw new \Exception("Can't find fuel type");
             }

@@ -37,21 +37,29 @@
     {
 
         /**
-         * @var VehicleOwner $vehicleOwner
+         * @var VehicleOwner $vehicleOwner The owner of the vehicle type
          */
-        protected $vehicleOwner;
+        private $vehicleOwner;
 
         /**
-         * @var VehicleType $vehicleType
-         */
-        protected $vehicleType;
-
-        /**
-         * @param VehicleOwner $vehicleOwner
+         * @param VehicleOwner $vehicleOwner The owner of the vehicle type
          */
         public function __construct(VehicleOwner $vehicleOwner) {
             $this->vehicleOwner = $vehicleOwner;
-            $this->vehicleType  = $vehicleOwner->getVehicleType();
+        }
+
+        /**
+         * @return VehicleOwner The owner of the vehicle type
+         */
+        protected function getVehicleOwner() {
+            return $this->vehicleOwner;
+        }
+
+        /**
+         * @return VehicleType The vehicle type of the owner
+         */
+        protected function getVehicleType() {
+            return $this->vehicleOwner->getVehicleType();
         }
 
         /**

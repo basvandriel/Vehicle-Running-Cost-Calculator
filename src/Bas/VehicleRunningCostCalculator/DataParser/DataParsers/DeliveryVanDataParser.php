@@ -28,7 +28,7 @@
 
 
     /**
-     * @property DeliveryVan $vehicleType
+     * @method DeliveryVan getVehicleType
      *
      * @package   Bas\VehicleRunningCostCalculator\DataParser\DataParsers
      *
@@ -49,20 +49,20 @@
          * @return array|int The data belonging to the vehicle owner's property's
          */
         public function parse(array $resolvedData) {
-            $weight = $this->vehicleType->getWeight();
+            $weight = $this->getVehicleType()->getWeight();
 
-            if ($this->vehicleOwner->isDisabled()) {
+            if ($this->getVehicleOwner()->isDisabled()) {
                 $data = $resolvedData['disabled'];
-            } elseif ($this->vehicleType->isCommercial()) {
+            } elseif ($this->getVehicleType()->isCommercial()) {
                 $data = $resolvedData['commercial'];
             } else {
                 $data = $resolvedData['passenger'];
             }
 
-            if ($this->vehicleOwner->isDisabled() || $this->vehicleType->isCommercial()) {
+            if ($this->getVehicleOwner()->isDisabled() || $this->getVehicleType()->isCommercial()) {
                 return $data[DataPropertyResolver::resolveWeightClass($data, $weight)];
             }
-            $fuelType = strtolower(FuelType::getName($this->vehicleType->getFuelType()));
+            $fuelType = strtolower(FuelType::getName($this->getVehicleType()->getFuelType()));
             $data     = $data[DataPropertyResolver::resolveWeightClass($data, $weight)];
             if (!isset($data[$fuelType])) {
                 throw new \Exception("Cant find the fuel type");

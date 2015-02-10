@@ -31,7 +31,7 @@
     /**
      * Defines a data parser for the passenger car
      *
-     * @property PassengerCar $vehicleType
+     * @method PassengerCar getVehicleType
      *
      * @package   Bas\VehicleRunningCostCalculator\DataParserFactory\DataParsers
      *
@@ -53,14 +53,14 @@
          * @return array|int The data belonging to the vehicle owner's property's
          */
         public function parse(array $resolvedData) {
-            $province = strtolower(Province::getName($this->vehicleOwner->getProvince()));
+            $province = strtolower(Province::getName($this->getVehicleOwner()->getProvince()));
 
             if (!isset($resolvedData[$province])) {
                 throw new \Exception("Cant find province!");
             }
             $data     = $resolvedData[$province];
-            $data     = $data[DataPropertyResolver::resolveWeightClass($data, $this->vehicleType->getWeight())];
-            $fuelType = strtolower(FuelType::getName($this->vehicleType->getFuelType()));
+            $data     = $data[DataPropertyResolver::resolveWeightClass($data, $this->getVehicleType()->getWeight())];
+            $fuelType = strtolower(FuelType::getName($this->getVehicleType()->getFuelType()));
 
             if (!isset($data[$fuelType])) {
                 throw new \Exception("Cant find fuel type");
