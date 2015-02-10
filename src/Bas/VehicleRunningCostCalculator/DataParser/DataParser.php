@@ -42,6 +42,8 @@
         private $vehicleOwner;
 
         /**
+         * Instantiates a new road tax data parser class
+         *
          * @param VehicleOwner $vehicleOwner The owner of the vehicle type
          */
         public final function __construct(VehicleOwner $vehicleOwner) {
@@ -64,11 +66,11 @@
 
         /**
          * Parses the resolved data and returns the right data belonged on the vehicle type and vehicle owner's
-         * property's
+         * properties
          *
          * @param array $resolvedData The resolved data array for the selected vehicle type
          *
-         * @return array|int The data belonging to the vehicle owner's property's.
+         * @return array|int The data belonging to the vehicle owner's properties
          */
         public abstract function parse(array $resolvedData);
     }
