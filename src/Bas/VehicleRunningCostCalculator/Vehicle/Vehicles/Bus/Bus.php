@@ -56,8 +56,6 @@
         }
 
         /**
-         * A getter for retrieving the $weight variable in a safe way.
-         *
          * @return float $weight The weight of the bus vehicle type
          */
         public function getWeight() {

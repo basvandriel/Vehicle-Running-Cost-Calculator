@@ -32,9 +32,7 @@
     interface VehicleType
     {
         /**
-         * A getter for retrieving the weight of the vehicle type
-         *
-         * @return float $weight The weight of the vehicle type
+         * @return float|null $weight The weight of the vehicle type
          */
         public function getWeight();
     }

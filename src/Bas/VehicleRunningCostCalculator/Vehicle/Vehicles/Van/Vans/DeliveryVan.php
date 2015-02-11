@@ -78,8 +78,6 @@
         }
 
         /**
-         * A getter for retrieving the $fuelType variable in a safe way.
-         *
          * @return int $fuelType The fuel type of the passenger car
          */
         public function getFuelType() {
@@ -87,8 +85,6 @@
         }
 
         /**
-         * A getter for retrieving the $weight variable in a safe way.
-         *
          * @return float $weight The weight of the passenger car.
          */
         public function getWeight() {
@@ -96,8 +92,6 @@
         }
 
         /**
-         * A check for if the delivery van is commercial
-         *
          * @return bool If the delivery van is commercial
          */
         public function isCommercial() {

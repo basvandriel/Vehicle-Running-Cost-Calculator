@@ -74,8 +74,6 @@
         }
 
         /**
-         * A getter for retrieving the $fuelType variable in a safe way.
-         *
          * @return int $fuelType The fuel type of the car vehicle type
          */
         public function getFuelType() {
@@ -83,8 +81,6 @@
         }
 
         /**
-         * A getter for retrieving the $weight variable in a safe way.
-         *
          * @return float $weight The weight of the car vehicle type
          */
         public function getWeight() {
@@ -92,8 +88,6 @@
         }
 
         /**
-         * A check if the vehicle type is rented
-         *
          * @return bool $isRented If the vehicle type is rented or not
          */
         public function isRented() {
